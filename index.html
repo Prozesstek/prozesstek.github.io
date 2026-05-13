@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frederik Leckebusch — IT-Dienstleistungen & Prozessautomatisierung</title>
+  <meta name="description" content="Ich automatisiere manuelle Abläufe in kleinen Unternehmen. Python, KI, Webapps — messbare Ergebnisse, keine IT-Sprache." />
+  <meta property="og:title" content="Frederik Leckebusch — IT-Dienstleistungen & Prozessautomatisierung" />
+  <meta property="og:description" content="Ich automatisiere manuelle Abläufe in kleinen Unternehmen. Python, KI, Webapps — messbare Ergebnisse, keine IT-Sprache." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://prozesstek.de" />
+  <meta name="robots" content="index, follow" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Frederik Leckebusch IT-Dienstleistungen & Prozessautomatisierung",
+    "url": "https://prozesstek.de",
+    "telephone": "+491739120904",
+    "email": "info@prozesstek.de",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Geraer Straße 21",
+      "addressLocality": "Erfurt",
+      "postalCode": "99096",
+      "addressCountry": "DE"
+    },
+    "areaServed": ["Erfurt", "Thüringen"],
+    "serviceType": ["IT-Dienstleistungen", "Prozessautomatisierung", "Python-Entwicklung", "KI-Integration"]
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:   { DEFAULT: '#0F172A', 700: '#1E293B', 600: '#334155' },
+            slate2: '#F8FAFC',
+            cta:    '#0369A1',
+          },
+          fontFamily: {
+            heading: ['Archivo', 'sans-serif'],
+            body:    ['Space Grotesk', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Space Grotesk', sans-serif; background: #F8FAFC; color: #020617; }
+    h1, h2, h3, h4 { font-family: 'Archivo', sans-serif; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* Pulse for metric numbers */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.5s ease forwards; }
+
+    /* Nav active */
+    .nav-link {
+      position: relative;
+      transition: color 200ms;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 2px; background: #0369A1;
+      transform: scaleX(0);
+      transition: transform 200ms;
+    }
+    .nav-link:hover::after { transform: scaleX(1); }
+    .nav-link:hover { color: #0369A1; }
+
+    /* Project card */
+    .project-card { transition: box-shadow 200ms, transform 200ms; }
+    .project-card:hover { box-shadow: 0 20px 40px rgba(15,23,42,0.12); transform: translateY(-3px); }
+
+    /* Service card hover */
+    .service-card { transition: border-color 200ms, box-shadow 200ms; }
+    .service-card:hover { border-color: #0369A1; box-shadow: 0 8px 24px rgba(3,105,161,0.10); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVIGATION — fixed, adapts dark↔light on scroll
+═══════════════════════════════════════════════ -->
+<div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+  <div id="nav-wrap" class="w-full max-w-4xl pointer-events-auto">
+
+    <!-- Main bar -->
+    <nav id="main-nav"
+         class="flex items-center justify-between px-5 h-14 rounded-2xl transition-all duration-300
+                bg-white/10 backdrop-blur-xl border border-white/15 shadow-[0_2px_24px_rgba(0,0,0,0.25)]">
+
+      <a href="#hero" id="nav-logo"
+         class="font-heading font-semibold text-sm tracking-tight cursor-pointer text-white transition-colors duration-300">
+        Frederik Leckebusch
+      </a>
+
+      <div id="nav-links"
+           class="hidden md:flex items-center gap-1 bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-2 py-1.5 transition-all duration-300">
+        <a href="#leistungen" class="nav-item px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-150 cursor-pointer">Leistungen</a>
+        <a href="#referenzen"  class="nav-item px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-150 cursor-pointer">Referenzen</a>
+        <a href="#ueber-mich"  class="nav-item px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-150 cursor-pointer">Über mich</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="#kontakt" id="nav-cta"
+           class="hidden md:inline-flex items-center gap-1.5 border border-white/30 hover:border-white/60 hover:bg-white/10 text-white text-sm font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer">
+          Gespräch anfragen
+        </a>
+        <button id="menu-btn" class="md:hidden p-2 cursor-pointer" aria-label="Menü">
+          <svg id="menu-icon-open" class="w-5 h-5 text-white transition-colors duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="menu-icon-close" class="w-5 h-5 text-white hidden transition-colors duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile dropdown -->
+    <div id="mobile-menu"
+         class="hidden mt-2 bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-all duration-300">
+      <a href="#leistungen" class="mobile-item px-3 py-2.5 text-sm text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer">Leistungen</a>
+      <a href="#referenzen"  class="mobile-item px-3 py-2.5 text-sm text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer">Referenzen</a>
+      <a href="#ueber-mich"  class="mobile-item px-3 py-2.5 text-sm text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer">Über mich</a>
+      <a href="#kontakt"     class="mobile-item mt-1 px-3 py-2.5 text-sm font-semibold text-white border border-white/30 hover:bg-white/10 rounded-xl transition-colors cursor-pointer text-center">Gespräch anfragen</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     HERO — Full-screen dark, glassmorphism
+═══════════════════════════════════════════════ -->
+<section id="hero" class="relative min-h-screen flex flex-col overflow-hidden" style="background: linear-gradient(135deg, #060d1f 0%, #0a1628 35%, #0d1f3c 60%, #0a2a4a 100%);">
+
+  <!-- Subtle grid overlay -->
+  <div class="absolute inset-0 opacity-[0.04]"
+       style="background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+  <!-- Glow blobs -->
+  <div class="absolute top-[-10%] right-[15%] w-[600px] h-[600px] rounded-full opacity-20" style="background: radial-gradient(circle, #0369A1 0%, transparent 70%);"></div>
+  <div class="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] rounded-full opacity-10" style="background: radial-gradient(circle, #2563EB 0%, transparent 70%);"></div>
+
+  <!-- HERO CONTENT -->
+  <div class="relative z-10 flex-1 flex items-center px-6 lg:px-12 py-16">
+    <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 lg:gap-20 items-center">
+
+      <!-- LEFT -->
+      <div>
+        <!-- Location tag -->
+        <div class="inline-flex items-center gap-2 text-white/50 text-xs font-medium uppercase tracking-widest mb-8">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Erfurt, Thüringen
+        </div>
+
+        <h1 class="text-4xl md:text-5xl xl:text-6xl font-bold text-white leading-[1.1] mb-6 tracking-tight">
+          Manuelle Abläufe<br />
+          <span style="background: linear-gradient(90deg, #60a5fa, #93c5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">automatisch erledigen.</span>
+        </h1>
+
+        <p class="text-white/60 text-lg leading-relaxed mb-10 max-w-lg">
+          Maßgeschneiderte Software für Handwerker und kleine Unternehmen.
+          Fester Preis. Keine IT-Sprache. Messbare Zeitersparnis.
+        </p>
+
+        <div class="flex flex-wrap gap-3 mb-16">
+          <a href="#kontakt"
+             class="inline-flex items-center gap-2 bg-white text-[#0a1628] font-semibold px-6 py-3 rounded-full hover:bg-white/90 transition-colors duration-200 cursor-pointer text-sm">
+            Kostenloses Erstgespräch
+          </a>
+          <a href="#referenzen"
+             class="inline-flex items-center gap-2 border border-white/25 hover:border-white/50 hover:bg-white/5 text-white/80 hover:text-white font-medium px-6 py-3 rounded-full transition-all duration-200 cursor-pointer text-sm">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            Projekte ansehen
+          </a>
+        </div>
+
+        <!-- Glassmorphism bottom cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="bg-white/8 backdrop-blur-sm border border-white/10 rounded-2xl p-4">
+            <div class="text-2xl font-bold text-white font-heading">4</div>
+            <div class="text-white/50 text-xs mt-1 leading-snug">Produktivsysteme im Betrieb</div>
+          </div>
+          <div class="bg-white/8 backdrop-blur-sm border border-white/10 rounded-2xl p-4">
+            <div class="text-2xl font-bold text-white font-heading">60+</div>
+            <div class="text-white/50 text-xs mt-1 leading-snug">Mitarbeiter mit meinen Tools</div>
+          </div>
+          <div class="bg-white/8 backdrop-blur-sm border border-white/10 rounded-2xl p-4">
+            <div class="text-2xl font-bold text-white font-heading">0 €</div>
+            <div class="text-white/50 text-xs mt-1 leading-snug">Erstgespräch & Analyse</div>
+          </div>
+          <div class="bg-white/8 backdrop-blur-sm border border-white/10 rounded-2xl p-4">
+            <div class="text-2xl font-bold text-white font-heading">2–6 Wo.</div>
+            <div class="text-white/50 text-xs mt-1 leading-snug">Typische Umsetzungszeit</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Floating project card — only desktop -->
+      <div class="hidden lg:flex flex-col gap-4">
+
+        <!-- Main card -->
+        <div class="bg-white/10 backdrop-blur-xl border border-white/15 rounded-3xl p-7 text-white">
+          <div class="flex items-center gap-2 mb-5">
+            <span class="w-2 h-2 bg-green-400 rounded-full inline-block"></span>
+            <span class="text-white/50 text-xs uppercase tracking-wider font-semibold">Aktives Projekt · Erfurt</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">E-Mail-Dashboard mit KI</h3>
+          <p class="text-white/60 text-sm leading-relaxed mb-6">Eingehende E-Mails werden automatisch kategorisiert und priorisiert. Kein manuelles Sortieren mehr.</p>
+          <div class="grid grid-cols-3 gap-3 pt-4 border-t border-white/10">
+            <div class="text-center">
+              <div class="font-bold text-lg">~2h</div>
+              <div class="text-white/40 text-xs mt-0.5">tägl. gespart</div>
+            </div>
+            <div class="text-center border-x border-white/10">
+              <div class="font-bold text-lg">100%</div>
+              <div class="text-white/40 text-xs mt-0.5">automatisiert</div>
+            </div>
+            <div class="text-center">
+              <div class="font-bold text-lg">500 €</div>
+              <div class="text-white/40 text-xs mt-0.5">Einmalpreis</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two small cards -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white/8 backdrop-blur-md border border-white/10 rounded-2xl p-5 text-white">
+            <div class="text-white/40 text-xs uppercase tracking-wider mb-3 font-semibold">Preismodell</div>
+            <div class="text-2xl font-bold mb-1">400–2.500 €</div>
+            <div class="text-white/50 text-xs">Fester Preis,<br />keine Stunden</div>
+          </div>
+          <div class="bg-white/8 backdrop-blur-md border border-white/10 rounded-2xl p-5 text-white">
+            <div class="text-white/40 text-xs uppercase tracking-wider mb-3 font-semibold">Garantie</div>
+            <div class="text-2xl font-bold mb-1">100%</div>
+            <div class="text-white/50 text-xs">Geld zurück wenn<br />nicht zufrieden</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="relative z-10 flex justify-center pb-8">
+    <a href="#leistungen" class="flex flex-col items-center gap-2 text-white/30 hover:text-white/60 transition-colors cursor-pointer">
+      <span class="text-xs uppercase tracking-widest">Mehr entdecken</span>
+      <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </a>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     LEISTUNGEN
+═══════════════════════════════════════════════ -->
+<section id="leistungen" class="py-24 px-6 lg:px-12 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-14">
+      <p class="text-[#0369A1] font-semibold text-sm uppercase tracking-wider mb-3">Leistungen</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-[#0F172A] mb-4">Was ich für Sie umsetze</h2>
+      <p class="text-slate-500 max-w-2xl">Keine Standardsoftware. Jede Lösung wird auf Ihre Abläufe zugeschnitten — und funktioniert vom ersten Tag an.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Service 1 -->
+      <div class="service-card border border-slate-200 rounded-xl p-6">
+        <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-[#0369A1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-[#0F172A] text-lg mb-2">Prozessautomatisierung</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Wiederkehrende Aufgaben (Berichte, E-Mails, Dateiablage) werden automatisch erledigt. Sie machen es einmal — das System macht es danach immer.</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Python</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Excel / CSV</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">E-Mail</span>
+        </div>
+        <div class="mt-4 pt-4 border-t border-slate-100">
+          <a href="#kontakt" class="inline-flex items-center gap-1 text-[#0369A1] text-sm font-medium hover:underline">
+            Gespräch anfragen
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card border border-slate-200 rounded-xl p-6">
+        <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-[#0369A1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-[#0F172A] text-lg mb-2">Dashboards & Web-Apps</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Übersichtliche Oberflächen, die Ihre wichtigsten Zahlen auf einen Blick zeigen. Läuft im Browser — kein Programm-Installation nötig.</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Flask</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">SQLite</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Browser</span>
+        </div>
+        <div class="mt-4 pt-4 border-t border-slate-100">
+          <a href="#kontakt" class="inline-flex items-center gap-1 text-[#0369A1] text-sm font-medium hover:underline">
+            Gespräch anfragen
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card border border-slate-200 rounded-xl p-6">
+        <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-[#0369A1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-[#0F172A] text-lg mb-2">Dokumente & PDF-Automation</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Angebote, Verträge, Rechnungen — automatisch befüllt und versendet. Gescannte Belege werden ausgelesen und sortiert.</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Word</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">PDF / OCR</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Outlook</span>
+        </div>
+        <div class="mt-4 pt-4 border-t border-slate-100">
+          <a href="#kontakt" class="inline-flex items-center gap-1 text-[#0369A1] text-sm font-medium hover:underline">
+            Gespräch anfragen
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card border border-slate-200 rounded-xl p-6">
+        <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-[#0369A1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-[#0F172A] text-lg mb-2">KI-Integration</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">E-Mails kategorisieren, Texte zusammenfassen, Daten klassifizieren — mit moderner KI (Claude) in Ihre bestehende Software eingebaut.</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Claude AI</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Anthropic API</span>
+        </div>
+        <div class="mt-4 pt-4 border-t border-slate-100">
+          <a href="#kontakt" class="inline-flex items-center gap-1 text-[#0369A1] text-sm font-medium hover:underline">
+            Gespräch anfragen
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="service-card border border-slate-200 rounded-xl p-6">
+        <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-[#0369A1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-[#0F172A] text-lg mb-2">Datenauswertung & Berichte</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Excel-Auswertungen die früher Stunden dauerten, in Sekunden automatisiert. Kennzahlen, Wochenbergichte, Personalübersichten.</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">pandas</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Excel</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">openpyxl</span>
+        </div>
+        <div class="mt-4 pt-4 border-t border-slate-100">
+          <a href="#kontakt" class="inline-flex items-center gap-1 text-[#0369A1] text-sm font-medium hover:underline">
+            Gespräch anfragen
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 6 — Pricing hint -->
+      <div class="border border-[#0369A1] bg-blue-50 rounded-xl p-6">
+        <div class="w-10 h-10 bg-[#0369A1] rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-[#0F172A] text-lg mb-2">Transparente Preise</h3>
+        <p class="text-slate-600 text-sm leading-relaxed mb-4">Einmalige Projektpauschale <strong>400 – 2.500 €</strong> je nach Umfang. Optional: Wartungsvertrag ab <strong>50 €/Monat</strong>.</p>
+        <a href="#kontakt" class="inline-flex items-center gap-1 text-[#0369A1] font-semibold text-sm cursor-pointer hover:underline">
+          Angebot anfragen
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SO FUNKTIONIERT ES
+═══════════════════════════════════════════════ -->
+<section class="py-24 px-6 lg:px-12 bg-[#0F172A]">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-blue-400 font-semibold text-sm uppercase tracking-wider mb-3">Der Ablauf</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Kein IT-Projekt. Kein Chaos.</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">Drei Schritte vom ersten Gespräch bis zur fertigen Lösung — Sie müssen kein einziges technisches Detail kennen.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 lg:gap-10 relative">
+
+      <!-- Connector line — only on desktop -->
+      <div class="hidden md:block absolute top-10 left-[calc(16.7%+1rem)] right-[calc(16.7%+1rem)] h-px bg-slate-700 z-0"></div>
+
+      <!-- Step 1 -->
+      <div class="relative z-10 text-center">
+        <div class="w-20 h-20 bg-[#0369A1] rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-9 h-9 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+          </svg>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+          <div class="text-blue-400 font-bold text-sm uppercase tracking-wider mb-2">Schritt 1</div>
+          <h3 class="text-white font-bold text-xl mb-3">Kostenloses Gespräch</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Sie schildern mir in 30 Minuten welchen Ablauf Sie loswerden wollen. Ich höre zu, stelle Fragen — und sage Ihnen ehrlich ob und wie ich helfen kann.</p>
+          <div class="mt-4 text-slate-500 text-xs">Dauer: 30 Min · per Telefon oder vor Ort</div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="relative z-10 text-center">
+        <div class="w-20 h-20 bg-[#0369A1] rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-9 h-9 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+          </svg>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+          <div class="text-blue-400 font-bold text-sm uppercase tracking-wider mb-2">Schritt 2</div>
+          <h3 class="text-white font-bold text-xl mb-3">Festes Angebot</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Sie bekommen ein schriftliches Angebot mit genauem Preis, Lieferumfang und Zeitplan. Kein Stundensatz, keine Überraschungen nachher.</p>
+          <div class="mt-4 text-slate-500 text-xs">Dauer: 1–3 Tage · schriftlich per E-Mail</div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="relative z-10 text-center">
+        <div class="w-20 h-20 bg-[#22C55E] rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-9 h-9 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+          <div class="text-green-400 font-bold text-sm uppercase tracking-wider mb-2">Schritt 3</div>
+          <h3 class="text-white font-bold text-xl mb-3">Läuft — fertig</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Nach 2–6 Wochen übergebe ich die fertige Lösung, erkläre Ihnen alles in 20 Minuten und bin danach per Telefon erreichbar. Keine IT-Abteilung nötig.</p>
+          <div class="mt-4 text-slate-500 text-xs">Umsetzung: 2–6 Wochen · inkl. Einweisung</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="text-center mt-14">
+      <a href="#kontakt"
+         class="inline-flex items-center gap-2 bg-[#0369A1] hover:bg-[#0284C7] text-white font-semibold px-8 py-4 rounded-lg transition-colors duration-200 cursor-pointer text-lg">
+        Jetzt Schritt 1 starten
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+      <p class="text-slate-500 text-sm mt-3">Kostenlos · Unverbindlich · Keine IT-Kenntnisse nötig</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     REFERENZEN
+═══════════════════════════════════════════════ -->
+<section id="referenzen" class="py-24 px-6 lg:px-12 bg-[#F8FAFC]">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-14">
+      <p class="text-[#0369A1] font-semibold text-sm uppercase tracking-wider mb-3">Referenzen</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-[#0F172A] mb-4">Bereits produktiv im Einsatz</h2>
+      <p class="text-slate-500 max-w-2xl">Alle Projekte wurden vor der Gründung meines Unternehmens im laufenden Betrieb eines Zeitarbeitsunternehmens (60 Mitarbeiter) entwickelt und eingeführt.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- Project 1 -->
+      <div class="project-card bg-white rounded-xl border border-slate-200 p-7">
+        <div class="flex items-start justify-between mb-4">
+          <span class="text-xs font-semibold bg-green-50 text-green-700 border border-green-200 px-2 py-1 rounded-full">Aktiv im Betrieb</span>
+          <span class="text-xs text-slate-400">Zeitarbeit · Erfurt</span>
+        </div>
+        <h3 class="font-bold text-[#0F172A] text-xl mb-2">E-Mail-Dashboard mit KI</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Eingehende E-Mails werden automatisch per KI kategorisiert, priorisiert und in einer Webanwendung übersichtlich angezeigt. Kein manuelles Sortieren mehr.</p>
+        <div class="grid grid-cols-3 gap-3 p-4 bg-slate-50 rounded-lg mb-5">
+          <div class="text-center">
+            <div class="font-bold text-[#0F172A] text-xl font-heading">~2h</div>
+            <div class="text-xs text-slate-500">tägl. Zeitersparnis</div>
+          </div>
+          <div class="text-center border-x border-slate-200">
+            <div class="font-bold text-[#0F172A] text-xl font-heading">100%</div>
+            <div class="text-xs text-slate-500">automatisch sortiert</div>
+          </div>
+          <div class="text-center">
+            <div class="font-bold text-[#0F172A] text-xl font-heading">500 €</div>
+            <div class="text-xs text-slate-500">Einführungspreis</div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Flask</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Claude AI</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Outlook (win32com)</span>
+        </div>
+        <div class="mt-4 pt-4 border-t border-slate-200">
+          <a href="#kontakt" class="inline-flex items-center gap-1 text-[#0369A1] text-sm font-medium hover:underline">
+            Ähnliches Projekt anfragen
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card bg-white rounded-xl border border-slate-200 p-7">
+        <div class="flex items-start justify-between mb-4">
+          <span class="text-xs font-semibold bg-green-50 text-green-700 border border-green-200 px-2 py-1 rounded-full">Aktiv im Betrieb</span>
+          <span class="text-xs text-slate-400">Zeitarbeit · Erfurt</span>
+        </div>
+        <h3 class="font-bold text-[#0F172A] text-xl mb-2">Automatischer Rechnungsversand</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Gescannte Rechnungs-PDFs werden per OCR ausgelesen, automatisch dem richtigen Kunden zugeordnet und per Outlook versendet. Vom Eingang bis zum Versand ohne manuelle Eingriffe.</p>
+        <div class="grid grid-cols-3 gap-3 p-4 bg-slate-50 rounded-lg mb-5">
+          <div class="text-center">
+            <div class="font-bold text-[#0F172A] text-xl font-heading">&lt;30s</div>
+            <div class="text-xs text-slate-500">pro Rechnung</div>
+          </div>
+          <div class="text-center border-x border-slate-200">
+            <div class="font-bold text-[#0F172A] text-xl font-heading">0</div>
+            <div class="text-xs text-slate-500">manuelle Schritte</div>
+          </div>
+          <div class="text-center">
+            <div class="font-bold text-[#0F172A] text-xl font-heading">wöchentl.</div>
+            <div class="text-xs text-slate-500">Versandzyklus</div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">EasyOCR</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">PyMuPDF</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Fuzzy-Matching</span>
+        </div>
+        <div class="mt-4 pt-4 border-t border-slate-200">
+          <a href="#kontakt" class="inline-flex items-center gap-1 text-[#0369A1] text-sm font-medium hover:underline">
+            Ähnliches Projekt anfragen
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card bg-white rounded-xl border border-slate-200 p-7">
+        <div class="flex items-start justify-between mb-4">
+          <span class="text-xs font-semibold bg-green-50 text-green-700 border border-green-200 px-2 py-1 rounded-full">Aktiv im Betrieb</span>
+          <span class="text-xs text-slate-400">Zeitarbeit · Erfurt</span>
+        </div>
+        <h3 class="font-bold text-[#0F172A] text-xl mb-2">Einsatzplanung mit Kartenansicht</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Interaktive Karte zeigt wo jeder Mitarbeiter eingesetzt ist, Fahrtstrecken und Unterkünfte. Wochenpläne per Klick einsehen statt in Excel suchen.</p>
+        <div class="grid grid-cols-2 gap-3 p-4 bg-slate-50 rounded-lg mb-5">
+          <div class="text-center">
+            <div class="font-bold text-[#0F172A] text-xl font-heading">60+</div>
+            <div class="text-xs text-slate-500">Mitarbeiter visualisiert</div>
+          </div>
+          <div class="text-center border-l border-slate-200">
+            <div class="font-bold text-[#0F172A] text-xl font-heading">Echtzeit</div>
+            <div class="text-xs text-slate-500">Planungsstand</div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Leaflet.js</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">pandas</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Excel-Export</span>
+        </div>
+        <div class="mt-4 pt-4 border-t border-slate-200">
+          <a href="#kontakt" class="inline-flex items-center gap-1 text-[#0369A1] text-sm font-medium hover:underline">
+            Ähnliches Projekt anfragen
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card bg-white rounded-xl border border-slate-200 p-7">
+        <div class="flex items-start justify-between mb-4">
+          <span class="text-xs font-semibold bg-green-50 text-green-700 border border-green-200 px-2 py-1 rounded-full">Aktiv im Betrieb</span>
+          <span class="text-xs text-slate-400">Zeitarbeit · Erfurt</span>
+        </div>
+        <h3 class="font-bold text-[#0F172A] text-xl mb-2">Unterkunftsverwaltung</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Webbasierte Verwaltung von Mitarbeiter-Unterkünften: Belegung, Kosten, Verträge. Ersetzt ein fehleranfälliges Excel-Modell mit 400+ Zeilen.</p>
+        <div class="grid grid-cols-2 gap-3 p-4 bg-slate-50 rounded-lg mb-5">
+          <div class="text-center">
+            <div class="font-bold text-[#0F172A] text-xl font-heading">400+</div>
+            <div class="text-xs text-slate-500">Datensätze migriert</div>
+          </div>
+          <div class="text-center border-l border-slate-200">
+            <div class="font-bold text-[#0F172A] text-xl font-heading">0</div>
+            <div class="text-xs text-slate-500">Excel-Fehler seither</div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Flask</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">SQLite</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">tkinter</span>
+        </div>
+        <div class="mt-4 pt-4 border-t border-slate-200">
+          <a href="#kontakt" class="inline-flex items-center gap-1 text-[#0369A1] text-sm font-medium hover:underline">
+            Ähnliches Projekt anfragen
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ÜBER MICH
+═══════════════════════════════════════════════ -->
+<section id="ueber-mich" class="py-24 px-6 lg:px-12 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <div>
+        <p class="text-[#0369A1] font-semibold text-sm uppercase tracking-wider mb-3">Über mich</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-[#0F172A] mb-6">IT-Entwickler mit<br />Unternehmer-Blick</h2>
+
+        <p class="text-slate-600 leading-relaxed mb-4">
+          Ich bin Frederik, 25 Jahre alt, aus Erfurt. Ich studiere Master Supply Chain Management und
+          arbeite hauptberuflich in einem Zeitarbeitsunternehmen — wo ich in den letzten Jahren
+          4 Produktivsysteme selbst entwickelt und eingeführt habe.
+        </p>
+        <p class="text-slate-600 leading-relaxed mb-8">
+          Was mich von reinen Entwicklern unterscheidet: Ich verstehe die betriebswirtschaftliche Seite.
+          Ich frage nicht nur „was soll die Software tun", sondern „was kostet Sie dieser Ablauf heute
+          wirklich — und was ist die Lösung wert?"
+        </p>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <span class="text-slate-600 text-sm">Bachelor BWL + Master Supply Chain Management (laufend)</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <span class="text-slate-600 text-sm">Python · Flask · KI-Integration · PDF/OCR · Outlook-Automation</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <span class="text-slate-600 text-sm">Kleinunternehmer §19 UStG — keine MwSt. auf Rechnungen</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <span class="text-slate-600 text-sm">Vor Ort in Erfurt/Thüringen oder remote</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Credentials panel -->
+      <div class="space-y-4">
+        <div class="bg-[#F8FAFC] border border-slate-200 rounded-xl p-6">
+          <h4 class="font-semibold text-[#0F172A] mb-1">Zielmarkt</h4>
+          <p class="text-slate-500 text-sm">Handwerk & KMU in Erfurt / Thüringen mit 2–20 Mitarbeitern: Elektriker, Maler, SHK, Schreiner, Zeitarbeit, Dienstleister.</p>
+        </div>
+        <div class="bg-[#F8FAFC] border border-slate-200 rounded-xl p-6">
+          <h4 class="font-semibold text-[#0F172A] mb-1">Typisches Projekt</h4>
+          <p class="text-slate-500 text-sm">Ein konkretes Problem, 2–6 Wochen Umsetzung, fester Preis. Kein IT-Projekt das nie fertig wird.</p>
+        </div>
+        <div class="bg-[#F8FAFC] border border-slate-200 rounded-xl p-6">
+          <h4 class="font-semibold text-[#0F172A] mb-1">Mein Versprechen</h4>
+          <p class="text-slate-500 text-sm">Ich liefere funktionierende Software, keine Konzepte. Wenn Sie nach einer Woche nicht zufrieden sind, bekommen Sie Ihr Geld zurück.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     KONTAKT
+═══════════════════════════════════════════════ -->
+<section id="kontakt" class="py-24 px-6 lg:px-12 bg-[#0F172A]">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-16">
+
+      <div>
+        <p class="text-blue-400 font-semibold text-sm uppercase tracking-wider mb-3">Kontakt</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Gespräch anfragen</h2>
+        <p class="text-slate-400 leading-relaxed mb-8">
+          Schildern Sie kurz welchen Ablauf Sie automatisieren wollen. Ich melde mich innerhalb von 24 Stunden — kostenlos, unverbindlich.
+        </p>
+
+        <div class="space-y-4">
+          <a href="mailto:info@prozesstek.de"
+             class="flex items-center gap-4 text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer group">
+            <div class="w-10 h-10 bg-white/10 group-hover:bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs text-slate-500 mb-0.5">E-Mail</div>
+              info@prozesstek.de
+            </div>
+          </a>
+
+          <a href="tel:+491739120904"
+             class="flex items-center gap-4 text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer group">
+            <div class="w-10 h-10 bg-white/10 group-hover:bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs text-slate-500 mb-0.5">Telefon</div>
+              +49 173 9120904
+            </div>
+          </a>
+
+          <div class="flex items-center gap-4 text-slate-300">
+            <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs text-slate-500 mb-0.5">Standort</div>
+              Erfurt, Thüringen
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <form id="contact-form" class="space-y-4" onsubmit="handleSubmit(event)">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label for="name" class="block text-sm text-slate-400 mb-1.5">Name</label>
+            <input id="name" type="text" required placeholder="Max Mustermann"
+                   class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0369A1] focus:ring-1 focus:ring-[#0369A1] transition-colors duration-200" />
+          </div>
+          <div>
+            <label for="email" class="block text-sm text-slate-400 mb-1.5">E-Mail</label>
+            <input id="email" type="email" required placeholder="max@beispiel.de"
+                   class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0369A1] focus:ring-1 focus:ring-[#0369A1] transition-colors duration-200" />
+          </div>
+        </div>
+        <div>
+          <label for="unternehmen" class="block text-sm text-slate-400 mb-1.5">Unternehmen (optional)</label>
+          <input id="unternehmen" type="text" placeholder="Maler Schmidt GmbH"
+                 class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0369A1] focus:ring-1 focus:ring-[#0369A1] transition-colors duration-200" />
+        </div>
+        <div>
+          <label for="nachricht" class="block text-sm text-slate-400 mb-1.5">Was wollen Sie automatisieren?</label>
+          <textarea id="nachricht" rows="4" required placeholder="Wir tippen jede Woche 50 Rechnungen manuell in Excel ein..."
+                    class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0369A1] focus:ring-1 focus:ring-[#0369A1] transition-colors duration-200 resize-none"></textarea>
+        </div>
+        <button type="submit"
+                class="w-full bg-[#0369A1] hover:bg-[#0284C7] disabled:opacity-60 text-white font-semibold py-3 rounded-lg transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2">
+          <span id="btn-text">Nachricht senden</span>
+          <svg id="btn-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </button>
+        <p class="text-xs text-slate-500 text-center">Kostenlos & unverbindlich · Antwort innerhalb 24h</p>
+        <div id="form-success" class="hidden text-center text-green-400 font-medium py-2">
+          Nachricht gesendet! Ich melde mich bald.
+        </div>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════
+     IMPRESSUM
+═══════════════════════════════════════════════ -->
+<section id="impressum" class="py-16 px-6 lg:px-12 bg-[#020617] border-t border-white/10">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-xl font-bold text-white mb-8">Impressum</h2>
+
+    <div class="space-y-6 text-slate-400 text-sm leading-relaxed">
+
+      <div>
+        <h3 class="text-white font-semibold mb-1">Angaben gemäß § 5 TMG</h3>
+        <p>Frederik Leckebusch<br />
+        IT-Dienstleistungen &amp; Prozessautomatisierung<br />
+        Geraer Straße 21<br />
+        99096 Erfurt</p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-1">Kontakt</h3>
+        <p>Telefon: <a href="tel:+491739120904" class="hover:text-white transition-colors">+49 173 9120904</a><br />
+        E-Mail: <a href="mailto:info@prozesstek.de" class="hover:text-white transition-colors">info@prozesstek.de</a></p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-1">Umsatzsteuer</h3>
+        <p>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-1">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
+        <p>Frederik Leckebusch<br />
+        Geraer Straße 21, 99096 Erfurt</p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-1">Haftungsausschluss</h3>
+        <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte übernehme ich jedoch keine Gewähr. Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte nach den allgemeinen Gesetzen verantwortlich.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="bg-[#020617] py-6 px-6 border-t border-white/5">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-600">
+    <div>Frederik Leckebusch · IT-Dienstleistungen &amp; Prozessautomatisierung · Erfurt</div>
+    <div class="flex gap-4">
+      <span>Kleinunternehmer §19 UStG</span>
+      <span>·</span>
+      <a href="#impressum" class="hover:text-slate-400 transition-colors">Impressum</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Nav: dark↔light on scroll ──────────────────
+  const heroSection = document.getElementById('hero');
+  const mainNav     = document.getElementById('main-nav');
+  const navLogo     = document.getElementById('nav-logo');
+  const navLinks    = document.getElementById('nav-links');
+  const navCta      = document.getElementById('nav-cta');
+  const mobileItems = document.querySelectorAll('.mobile-item');
+  const burgerOpen  = document.getElementById('menu-icon-open');
+  const burgerClose = document.getElementById('menu-icon-close');
+
+  function setNavMode(dark) {
+    if (dark) {
+      // Over hero — dark glass
+      mainNav.style.background  = 'rgba(255,255,255,0.10)';
+      mainNav.style.borderColor = 'rgba(255,255,255,0.15)';
+      mainNav.style.boxShadow   = '0 2px 24px rgba(0,0,0,0.25)';
+      navLogo.style.color = '#ffffff';
+      if (navLinks) {
+        navLinks.style.background   = 'rgba(255,255,255,0.10)';
+        navLinks.style.borderColor  = 'rgba(255,255,255,0.15)';
+      }
+      document.querySelectorAll('.nav-item').forEach(el => {
+        el.style.color = 'rgba(255,255,255,0.70)';
+      });
+      if (navCta) {
+        navCta.style.borderColor = 'rgba(255,255,255,0.30)';
+        navCta.style.color = '#ffffff';
+        navCta.style.background = 'transparent';
+      }
+      burgerOpen.style.color  = '#ffffff';
+      burgerClose.style.color = '#ffffff';
+      document.getElementById('mobile-menu').style.background   = 'rgba(255,255,255,0.10)';
+      document.getElementById('mobile-menu').style.borderColor  = 'rgba(255,255,255,0.15)';
+      mobileItems.forEach(el => el.style.color = 'rgba(255,255,255,0.80)');
+    } else {
+      // Over light sections — white glass
+      mainNav.style.background  = 'rgba(255,255,255,0.88)';
+      mainNav.style.borderColor = 'rgba(203,213,225,0.60)';
+      mainNav.style.boxShadow   = '0 4px 32px rgba(15,23,42,0.10)';
+      navLogo.style.color = '#0F172A';
+      if (navLinks) {
+        navLinks.style.background  = 'rgba(241,245,249,0.80)';
+        navLinks.style.borderColor = 'rgba(203,213,225,0.60)';
+      }
+      document.querySelectorAll('.nav-item').forEach(el => {
+        el.style.color = '#64748b';
+      });
+      if (navCta) {
+        navCta.style.borderColor = '#0F172A';
+        navCta.style.color = '#0F172A';
+        navCta.style.background = 'transparent';
+      }
+      burgerOpen.style.color  = '#334155';
+      burgerClose.style.color = '#334155';
+      document.getElementById('mobile-menu').style.background  = 'rgba(255,255,255,0.95)';
+      document.getElementById('mobile-menu').style.borderColor = 'rgba(203,213,225,0.60)';
+      mobileItems.forEach(el => el.style.color = '#475569');
+    }
+  }
+
+  const heroBottom = () => heroSection.offsetTop + heroSection.offsetHeight - 80;
+  window.addEventListener('scroll', () => setNavMode(window.scrollY < heroBottom()));
+  setNavMode(true); // initial state
+
+  // ── Mobile menu toggle ──────────────────────────
+  const menuBtn  = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen   = document.getElementById('menu-icon-open');
+  const iconClose  = document.getElementById('menu-icon-close');
+
+  menuBtn.addEventListener('click', () => {
+    const isOpen = !mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden', isOpen);
+    mobileMenu.classList.toggle('flex', !isOpen);
+    iconOpen.classList.toggle('hidden', !isOpen);
+    iconClose.classList.toggle('hidden', isOpen);
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileMenu.classList.remove('flex');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+    });
+  });
+
+
+  // ── Kontaktformular (Formspree) ─────────────────
+  // Setup: formspree.io → kostenloses Konto → neues Formular erstellen → ID hier eintragen
+  const FORMSPREE_ID = "xjglzqnr";
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    const btnText = document.getElementById('btn-text');
+    const successMsg = document.getElementById('form-success');
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const unternehmen = document.getElementById('unternehmen').value;
+    const nachricht = document.getElementById('nachricht').value;
+
+    btn.disabled = true;
+    btnText.textContent = 'Wird gesendet...';
+
+    if (!FORMSPREE_ID) {
+      // Fallback bis Formspree eingerichtet ist
+      const subject = encodeURIComponent(`Anfrage von ${name}${unternehmen ? ' (' + unternehmen + ')' : ''}`);
+      const body = encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\nUnternehmen: ${unternehmen}\n\nNachricht:\n${nachricht}`);
+      window.open(`mailto:info@prozesstek.de?subject=${subject}&body=${body}`);
+      setTimeout(() => {
+        successMsg.textContent = 'E-Mail-Programm geöffnet — bitte abschicken!';
+        successMsg.classList.remove('hidden');
+        btn.disabled = false;
+        btnText.textContent = 'Nachricht senden';
+      }, 500);
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, email, unternehmen, nachricht })
+      });
+      if (res.ok) {
+        form.reset();
+        successMsg.textContent = 'Nachricht gesendet! Ich melde mich innerhalb von 24 Stunden.';
+        successMsg.classList.remove('hidden');
+      } else {
+        throw new Error('Fehler');
+      }
+    } catch {
+      successMsg.textContent = 'Fehler beim Senden. Bitte direkt an info@prozesstek.de schreiben.';
+      successMsg.classList.remove('hidden');
+      successMsg.classList.add('text-red-400');
+    } finally {
+      btn.disabled = false;
+      btnText.textContent = 'Nachricht senden';
+    }
+  }
+</script>
+
+</body>
+</html>
