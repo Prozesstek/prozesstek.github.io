@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF- & Dokumenten-Automation in Erfurt – Angebote, Rechnungen, Belege</title>
+  <meta name="description" content="Angebote, Verträge und Rechnungen automatisch befüllen und versenden, gescannte Belege per OCR auslesen — für Handwerk und KMU in Erfurt und Thüringen." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#FAF8F4" />
+  <link rel="canonical" href="https://prozesstek.de/leistungen/dokumente-pdf-automation/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F172A'/%3E%3Cpath d='M9 16h11m0 0l-4-4m4 4l-4 4' fill='none' stroke='%230EA5E9' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="PDF- & Dokumenten-Automation in Erfurt" />
+  <meta property="og:description" content="Angebote, Rechnungen und Belege automatisch verarbeiten — für Handwerk und KMU in Erfurt und Thüringen." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://prozesstek.de/leistungen/dokumente-pdf-automation/" />
+  <meta property="og:image" content="https://prozesstek.de/og-image.svg" />
+  <meta property="og:locale" content="de_DE" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Dokumente & PDF-Automation",
+    "serviceType": "Dokumentenautomatisierung",
+    "url": "https://prozesstek.de/leistungen/dokumente-pdf-automation/",
+    "description": "Automatisches Befüllen und Versenden von Angeboten, Verträgen und Rechnungen sowie Auslesen gescannter Belege per OCR.",
+    "areaServed": [{ "@type": "City", "name": "Erfurt" }, { "@type": "State", "name": "Thüringen" }],
+    "provider": { "@type": "ProfessionalService", "name": "Frederik Leckebusch IT-Dienstleistungen & Prozessautomatisierung", "@id": "https://prozesstek.de/#business" },
+    "offers": { "@type": "Offer", "priceCurrency": "EUR", "price": "400", "description": "Projektpauschale ab 400 €, je nach Umfang bis 2.500 €." }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://prozesstek.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Leistungen", "item": "https://prozesstek.de/#leistungen" },
+      { "@type": "ListItem", "position": 3, "name": "Dokumente & PDF-Automation", "item": "https://prozesstek.de/leistungen/dokumente-pdf-automation/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Funktioniert das auch mit gescannten Papierbelegen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Per Texterkennung (OCR) werden auch eingescannte Belege ausgelesen und automatisch zugeordnet." } },
+      { "@type": "Question", "name": "Kann ich meine eigenen Vorlagen verwenden?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Ihre bestehenden Word- oder PDF-Vorlagen werden als Grundlage genutzt und automatisch mit den richtigen Daten befüllt." } },
+      { "@type": "Question", "name": "Werden die Dokumente auch versendet?", "acceptedAnswer": { "@type": "Answer", "text": "Auf Wunsch ja — die fertigen Dokumente können automatisch per E-Mail an den richtigen Empfänger gehen." } }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { ink:{DEFAULT:'#0F172A',soft:'#1E293B'}, paper:{DEFAULT:'#FAF8F4',2:'#F3EEE5'}, accent:{DEFAULT:'#0369A1',600:'#0284C7'} },
+      fontFamily: { heading:['Archivo','sans-serif'], body:['Space Grotesk','sans-serif'] }
+    }}};
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family:'Space Grotesk',sans-serif; background:#FAF8F4; color:#292524; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3,h4 { font-family:'Archivo',sans-serif; }
+    .nums { font-variant-numeric: tabular-nums; }
+    .lift { transition: box-shadow 220ms ease, transform 220ms ease; }
+    .lift:hover { box-shadow:0 18px 40px -12px rgba(41,37,36,0.18); transform:translateY(-3px); }
+    .btn { transition: background 200ms ease, transform 120ms ease; }
+    .btn:active { transform: translateY(1px) scale(0.99); }
+    *:focus-visible { outline:2px solid #0369A1; outline-offset:2px; border-radius:4px; }
+    @media (prefers-reduced-motion: reduce){*,*::before,*::after{transition-duration:.01ms!important}}
+  </style>
+</head>
+<body class="antialiased">
+
+<header class="sticky top-0 z-50 bg-paper/85 backdrop-blur-xl border-b border-stone-200/70">
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="../../" class="flex items-center gap-2 font-heading font-bold text-sm text-ink">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-ink">
+        <svg class="w-4 h-4" fill="none" stroke="#0EA5E9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h11m0 0l-4-4m4 4l-4 4"/></svg>
+      </span>
+      Frederik Leckebusch
+    </a>
+    <div class="flex items-center gap-2">
+      <a href="../../#leistungen" class="hidden sm:inline-flex px-3.5 py-1.5 text-sm text-stone-600 hover:text-ink hover:bg-stone-200/60 rounded-full transition-colors">Alle Leistungen</a>
+      <a href="../../#kontakt" class="btn inline-flex items-center gap-1.5 bg-ink hover:bg-ink-soft text-white text-sm font-medium px-4 py-2 rounded-full">Gespräch anfragen</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="px-6 pt-14 pb-16 bg-paper">
+    <div class="max-w-3xl mx-auto">
+      <nav aria-label="Brotkrümel" class="text-xs text-stone-500 mb-7">
+        <a href="../../" class="hover:text-accent">Startseite</a>
+        <span class="mx-1.5 text-stone-300">/</span>
+        <a href="../../#leistungen" class="hover:text-accent">Leistungen</a>
+        <span class="mx-1.5 text-stone-300">/</span>
+        <span class="text-stone-700">Dokumente & PDF-Automation</span>
+      </nav>
+      <p class="text-accent font-semibold text-sm uppercase tracking-[0.16em] mb-3">Leistung 03</p>
+      <h1 class="font-heading font-extrabold text-ink text-4xl md:text-5xl leading-[1.08] tracking-tight mb-5" style="text-wrap:balance">
+        Dokumente & PDF-Automation für Betriebe in Erfurt
+      </h1>
+      <p class="text-stone-600 text-lg leading-relaxed mb-8">
+        Angebote tippen, Rechnungen abtippen, Belege sortieren — Dokumentenarbeit frisst Zeit und schleicht sich mit Fehlern ein. Ich automatisiere das Erstellen, Auslesen und Versenden Ihrer Dokumente.
+      </p>
+      <a href="../../#kontakt" class="btn inline-flex items-center gap-2 bg-accent hover:bg-accent-600 text-white font-semibold px-6 py-3.5 rounded-xl text-sm shadow-[0_10px_24px_-10px_rgba(3,105,161,0.6)]">
+        Kostenloses Erstgespräch
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-white border-t border-stone-200/70">
+    <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 class="font-heading text-xl font-bold text-ink mb-3">Das Problem</h2>
+        <p class="text-stone-600 leading-relaxed">Für jedes Angebot und jede Rechnung werden dieselben Felder von Hand ausgefüllt, Daten aus anderen Listen herauskopiert und Dokumente einzeln verschickt. Gescannte Belege landen in einem Ordner und müssen mühsam zugeordnet werden. Das dauert — und kleine Tippfehler haben große Wirkung.</p>
+      </div>
+      <div>
+        <h2 class="font-heading text-xl font-bold text-ink mb-3">Wie ich es löse</h2>
+        <p class="text-stone-600 leading-relaxed">Ihre Vorlagen werden automatisch mit den richtigen Daten befüllt und als fertiges PDF erzeugt. Gescannte Belege liest eine Texterkennung (OCR) aus, ordnet sie dem richtigen Vorgang zu und legt sie ab. Auf Wunsch geht das fertige Dokument direkt per E-Mail raus.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-paper-2 border-t border-stone-200/70">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-heading text-2xl font-bold text-ink mb-6">Beispiel aus der Praxis</h2>
+      <div class="bg-white rounded-2xl border border-stone-200/80 p-7 lift">
+        <p class="text-stone-600 leading-relaxed mb-5">In einem Zeitarbeitsunternehmen werden gescannte Rechnungs-PDFs per OCR ausgelesen, automatisch dem richtigen Kunden zugeordnet und per Outlook versendet — vom Eingang bis zum Versand ohne manuelle Eingriffe.</p>
+        <div class="grid grid-cols-3 gap-4 pt-5 border-t border-stone-200/70">
+          <div><div class="nums font-heading font-bold text-ink text-2xl">&lt;30s</div><div class="text-stone-500 text-xs mt-0.5">pro Rechnung</div></div>
+          <div class="px-3 border-x border-stone-100"><div class="nums font-heading font-bold text-ink text-2xl">0</div><div class="text-stone-500 text-xs mt-0.5">manuelle Schritte</div></div>
+          <div><div class="nums font-heading font-bold text-ink text-2xl">wöchentl.</div><div class="text-stone-500 text-xs mt-0.5">Versandzyklus</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-white border-t border-stone-200/70">
+    <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 class="font-heading text-xl font-bold text-ink mb-4">Typische Einsatzfälle</h2>
+        <ul class="space-y-3 text-stone-600 text-sm">
+          <li class="flex gap-3"><span class="text-accent">→</span> Angebote und Verträge aus Vorlagen automatisch erstellen</li>
+          <li class="flex gap-3"><span class="text-accent">→</span> Rechnungen erzeugen und versenden</li>
+          <li class="flex gap-3"><span class="text-accent">→</span> Gescannte Belege per OCR auslesen und zuordnen</li>
+          <li class="flex gap-3"><span class="text-accent">→</span> Daten aus PDFs in Excel oder Programme übernehmen</li>
+          <li class="flex gap-3"><span class="text-accent">→</span> Serienbriefe und Sammelmappen</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="font-heading text-xl font-bold text-ink mb-4">Eingesetzte Technik</h2>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1.5 rounded-md">PyMuPDF</span>
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1.5 rounded-md">EasyOCR</span>
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1.5 rounded-md">Word-Vorlagen</span>
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1.5 rounded-md">Outlook</span>
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1.5 rounded-md">Python</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-paper-2 border-t border-stone-200/70">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-heading text-2xl font-bold text-ink mb-8">Häufige Fragen</h2>
+      <div class="space-y-5">
+        <div class="bg-white rounded-xl border border-stone-200/80 p-6">
+          <h3 class="font-heading font-semibold text-ink mb-2">Funktioniert das auch mit gescannten Papierbelegen?</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">Ja. Per Texterkennung (OCR) werden auch eingescannte Belege ausgelesen und automatisch zugeordnet.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200/80 p-6">
+          <h3 class="font-heading font-semibold text-ink mb-2">Kann ich meine eigenen Vorlagen verwenden?</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">Ja. Ihre bestehenden Word- oder PDF-Vorlagen werden als Grundlage genutzt und automatisch mit den richtigen Daten befüllt.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200/80 p-6">
+          <h3 class="font-heading font-semibold text-ink mb-2">Werden die Dokumente auch versendet?</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">Auf Wunsch ja — die fertigen Dokumente können automatisch per E-Mail an den richtigen Empfänger gehen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-ink">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Welche Dokumente kosten Sie am meisten Zeit?</h2>
+      <p class="text-stone-300 mb-8 max-w-xl mx-auto">Zeigen Sie mir Ihre Vorlagen und Ihren Ablauf. Ich sage Ihnen, welcher Teil sich automatisieren lässt — kostenlos und unverbindlich.</p>
+      <a href="../../#kontakt" class="btn inline-flex items-center gap-2 bg-accent hover:bg-accent-600 text-white font-semibold px-7 py-3.5 rounded-xl">
+        Erstgespräch anfragen
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-ink-soft py-7 px-6 border-t border-white/5">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-stone-500">
+    <div>Frederik Leckebusch · IT-Dienstleistungen &amp; Prozessautomatisierung · Erfurt</div>
+    <div class="flex items-center gap-4">
+      <a href="../../" class="hover:text-stone-300 transition-colors">Startseite</a>
+      <a href="../../#impressum" class="hover:text-stone-300 transition-colors">Impressum</a>
+      <a href="../../#datenschutz" class="hover:text-stone-300 transition-colors">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

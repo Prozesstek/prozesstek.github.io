@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datenauswertung & automatische Berichte in Erfurt – Excel automatisieren</title>
+  <meta name="description" content="Excel-Auswertungen, die früher Stunden dauerten, in Sekunden automatisiert: Kennzahlen, Wochenberichte, Personalübersichten. Für KMU in Erfurt und Thüringen." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#FAF8F4" />
+  <link rel="canonical" href="https://prozesstek.de/leistungen/datenauswertung-berichte/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F172A'/%3E%3Cpath d='M9 16h11m0 0l-4-4m4 4l-4 4' fill='none' stroke='%230EA5E9' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Datenauswertung & automatische Berichte in Erfurt" />
+  <meta property="og:description" content="Excel-Auswertungen in Sekunden statt Stunden — für KMU in Erfurt und Thüringen." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://prozesstek.de/leistungen/datenauswertung-berichte/" />
+  <meta property="og:image" content="https://prozesstek.de/og-image.svg" />
+  <meta property="og:locale" content="de_DE" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Datenauswertung & Berichte",
+    "serviceType": "Datenauswertung",
+    "url": "https://prozesstek.de/leistungen/datenauswertung-berichte/",
+    "description": "Automatisierte Excel-Auswertungen und wiederkehrende Berichte: Kennzahlen, Wochenberichte und Personalübersichten in Sekunden statt Stunden.",
+    "areaServed": [{ "@type": "City", "name": "Erfurt" }, { "@type": "State", "name": "Thüringen" }],
+    "provider": { "@type": "ProfessionalService", "name": "Frederik Leckebusch IT-Dienstleistungen & Prozessautomatisierung", "@id": "https://prozesstek.de/#business" },
+    "offers": { "@type": "Offer", "priceCurrency": "EUR", "price": "400", "description": "Projektpauschale ab 400 €, je nach Umfang bis 2.500 €." }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://prozesstek.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Leistungen", "item": "https://prozesstek.de/#leistungen" },
+      { "@type": "ListItem", "position": 3, "name": "Datenauswertung & Berichte", "item": "https://prozesstek.de/leistungen/datenauswertung-berichte/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Kann ich meine bestehenden Excel-Dateien weiterverwenden?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Die Auswertung baut auf Ihren vorhandenen Excel-Dateien auf — Sie müssen nichts neu erfassen." } },
+      { "@type": "Question", "name": "Laufen die Berichte automatisch?", "acceptedAnswer": { "@type": "Answer", "text": "Auf Wunsch ja — Berichte können auf Knopfdruck oder automatisch zu festen Zeiten (z. B. jeden Montagmorgen) erstellt werden." } },
+      { "@type": "Question", "name": "Was, wenn sich mein Tabellenaufbau ändert?", "acceptedAnswer": { "@type": "Answer", "text": "Kleinere Anpassungen sind über den Wartungsvertrag abgedeckt. Bei größeren Umbauten stimmen wir uns kurz ab." } }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { ink:{DEFAULT:'#0F172A',soft:'#1E293B'}, paper:{DEFAULT:'#FAF8F4',2:'#F3EEE5'}, accent:{DEFAULT:'#0369A1',600:'#0284C7'} },
+      fontFamily: { heading:['Archivo','sans-serif'], body:['Space Grotesk','sans-serif'] }
+    }}};
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family:'Space Grotesk',sans-serif; background:#FAF8F4; color:#292524; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3,h4 { font-family:'Archivo',sans-serif; }
+    .nums { font-variant-numeric: tabular-nums; }
+    .lift { transition: box-shadow 220ms ease, transform 220ms ease; }
+    .lift:hover { box-shadow:0 18px 40px -12px rgba(41,37,36,0.18); transform:translateY(-3px); }
+    .btn { transition: background 200ms ease, transform 120ms ease; }
+    .btn:active { transform: translateY(1px) scale(0.99); }
+    *:focus-visible { outline:2px solid #0369A1; outline-offset:2px; border-radius:4px; }
+    @media (prefers-reduced-motion: reduce){*,*::before,*::after{transition-duration:.01ms!important}}
+  </style>
+</head>
+<body class="antialiased">
+
+<header class="sticky top-0 z-50 bg-paper/85 backdrop-blur-xl border-b border-stone-200/70">
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="../../" class="flex items-center gap-2 font-heading font-bold text-sm text-ink">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-ink">
+        <svg class="w-4 h-4" fill="none" stroke="#0EA5E9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h11m0 0l-4-4m4 4l-4 4"/></svg>
+      </span>
+      Frederik Leckebusch
+    </a>
+    <div class="flex items-center gap-2">
+      <a href="../../#leistungen" class="hidden sm:inline-flex px-3.5 py-1.5 text-sm text-stone-600 hover:text-ink hover:bg-stone-200/60 rounded-full transition-colors">Alle Leistungen</a>
+      <a href="../../#kontakt" class="btn inline-flex items-center gap-1.5 bg-ink hover:bg-ink-soft text-white text-sm font-medium px-4 py-2 rounded-full">Gespräch anfragen</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="px-6 pt-14 pb-16 bg-paper">
+    <div class="max-w-3xl mx-auto">
+      <nav aria-label="Brotkrümel" class="text-xs text-stone-500 mb-7">
+        <a href="../../" class="hover:text-accent">Startseite</a>
+        <span class="mx-1.5 text-stone-300">/</span>
+        <a href="../../#leistungen" class="hover:text-accent">Leistungen</a>
+        <span class="mx-1.5 text-stone-300">/</span>
+        <span class="text-stone-700">Datenauswertung & Berichte</span>
+      </nav>
+      <p class="text-accent font-semibold text-sm uppercase tracking-[0.16em] mb-3">Leistung 05</p>
+      <h1 class="font-heading font-extrabold text-ink text-4xl md:text-5xl leading-[1.08] tracking-tight mb-5" style="text-wrap:balance">
+        Datenauswertung & automatische Berichte für KMU in Erfurt
+      </h1>
+      <p class="text-stone-600 text-lg leading-relaxed mb-8">
+        Wenn die immer gleiche Excel-Auswertung jede Woche eine Stunde frisst und am Ende doch ein Fehler drin ist, lässt sich das automatisieren. Ich baue Auswertungen, die auf Knopfdruck fertige, verlässliche Berichte liefern.
+      </p>
+      <a href="../../#kontakt" class="btn inline-flex items-center gap-2 bg-accent hover:bg-accent-600 text-white font-semibold px-6 py-3.5 rounded-xl text-sm shadow-[0_10px_24px_-10px_rgba(3,105,161,0.6)]">
+        Kostenloses Erstgespräch
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-white border-t border-stone-200/70">
+    <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 class="font-heading text-xl font-bold text-ink mb-3">Das Problem</h2>
+        <p class="text-stone-600 leading-relaxed">Daten werden aus mehreren Tabellen zusammenkopiert, Formeln von Hand angepasst, Zahlen für die Auswertung neu sortiert. Das ist jede Woche dieselbe Fleißarbeit — und je mehr Schritte, desto leichter schleicht sich ein Fehler ein, den niemand bemerkt.</p>
+      </div>
+      <div>
+        <h2 class="font-heading text-xl font-bold text-ink mb-3">Wie ich es löse</h2>
+        <p class="text-stone-600 leading-relaxed">Ich baue eine Auswertung, die Ihre Daten automatisch einliest, zusammenführt und in einen fertigen Bericht verwandelt — als Excel-Datei, PDF oder Übersicht. Was vorher Stunden dauerte, läuft danach in Sekunden, immer gleich und nachvollziehbar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-paper-2 border-t border-stone-200/70">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-heading text-2xl font-bold text-ink mb-6">Beispiel aus der Praxis</h2>
+      <div class="bg-white rounded-2xl border border-stone-200/80 p-7 lift">
+        <p class="text-stone-600 leading-relaxed mb-5">In einem Zeitarbeitsunternehmen werden wiederkehrende Personal- und Einsatzauswertungen automatisch erstellt. Die Zahlen kommen aus bestehenden Tabellen, der Bericht entsteht auf Knopfdruck — ohne manuelles Zusammenkopieren.</p>
+        <div class="grid grid-cols-3 gap-4 pt-5 border-t border-stone-200/70">
+          <div><div class="nums font-heading font-bold text-ink text-2xl">Sek.</div><div class="text-stone-500 text-xs mt-0.5">statt Stunden</div></div>
+          <div class="px-3 border-x border-stone-100"><div class="nums font-heading font-bold text-ink text-2xl">0</div><div class="text-stone-500 text-xs mt-0.5">Kopierfehler</div></div>
+          <div><div class="nums font-heading font-bold text-ink text-2xl">100%</div><div class="text-stone-500 text-xs mt-0.5">reproduzierbar</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-white border-t border-stone-200/70">
+    <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 class="font-heading text-xl font-bold text-ink mb-4">Typische Einsatzfälle</h2>
+        <ul class="space-y-3 text-stone-600 text-sm">
+          <li class="flex gap-3"><span class="text-accent">→</span> Wöchentliche und monatliche Kennzahlen-Berichte</li>
+          <li class="flex gap-3"><span class="text-accent">→</span> Personal- und Einsatzübersichten</li>
+          <li class="flex gap-3"><span class="text-accent">→</span> Umsatz-, Kosten- und Auftragsauswertungen</li>
+          <li class="flex gap-3"><span class="text-accent">→</span> Daten aus mehreren Tabellen zusammenführen</li>
+          <li class="flex gap-3"><span class="text-accent">→</span> Wiederkehrende Exporte für Steuerberater oder Kunden</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="font-heading text-xl font-bold text-ink mb-4">Eingesetzte Technik</h2>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1.5 rounded-md">pandas</span>
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1.5 rounded-md">openpyxl</span>
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1.5 rounded-md">Excel</span>
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1.5 rounded-md">Python</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-paper-2 border-t border-stone-200/70">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-heading text-2xl font-bold text-ink mb-8">Häufige Fragen</h2>
+      <div class="space-y-5">
+        <div class="bg-white rounded-xl border border-stone-200/80 p-6">
+          <h3 class="font-heading font-semibold text-ink mb-2">Kann ich meine bestehenden Excel-Dateien weiterverwenden?</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">Ja. Die Auswertung baut auf Ihren vorhandenen Excel-Dateien auf — Sie müssen nichts neu erfassen.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200/80 p-6">
+          <h3 class="font-heading font-semibold text-ink mb-2">Laufen die Berichte automatisch?</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">Auf Wunsch ja — Berichte können auf Knopfdruck oder automatisch zu festen Zeiten (z. B. jeden Montagmorgen) erstellt werden.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200/80 p-6">
+          <h3 class="font-heading font-semibold text-ink mb-2">Was, wenn sich mein Tabellenaufbau ändert?</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">Kleinere Anpassungen sind über den Wartungsvertrag abgedeckt. Bei größeren Umbauten stimmen wir uns kurz ab.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-ink">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Welche Auswertung machen Sie immer wieder von Hand?</h2>
+      <p class="text-stone-300 mb-8 max-w-xl mx-auto">Schicken Sie mir ein Beispiel Ihrer Tabelle. Ich zeige Ihnen, wie der Bericht künftig auf Knopfdruck entsteht — kostenlos und unverbindlich.</p>
+      <a href="../../#kontakt" class="btn inline-flex items-center gap-2 bg-accent hover:bg-accent-600 text-white font-semibold px-7 py-3.5 rounded-xl">
+        Erstgespräch anfragen
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-ink-soft py-7 px-6 border-t border-white/5">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-stone-500">
+    <div>Frederik Leckebusch · IT-Dienstleistungen &amp; Prozessautomatisierung · Erfurt</div>
+    <div class="flex items-center gap-4">
+      <a href="../../" class="hover:text-stone-300 transition-colors">Startseite</a>
+      <a href="../../#impressum" class="hover:text-stone-300 transition-colors">Impressum</a>
+      <a href="../../#datenschutz" class="hover:text-stone-300 transition-colors">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
