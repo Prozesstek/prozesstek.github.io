@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEM-Teile24 – Angebotserstellung</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;500;600&family=Epilogue:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f6f2;
+    --surface: #ffffff;
+    --surface2: #f4f1ec;
+    --surface3: #ede9e1;
+    --border: #e2ddd5;
+    --border2: #cfc9be;
+    --text: #1e1b16;
+    --text-muted: #9c9485;
+    --text-dim: #6b6355;
+    --accent: #c94e1e;
+    --accent-light: #fdf0eb;
+    --accent-mid: rgba(201,78,30,0.15);
+    --green: #2d7a52;
+    --green-light: #edf7f2;
+    --yellow: #8a6400;
+    --yellow-light: #fdf8e8;
+    --blue: #1d5fa8;
+    --blue-light: #eaf2fc;
+    --shadow-sm: 0 1px 2px rgba(30,27,22,0.06);
+    --shadow: 0 2px 8px rgba(30,27,22,0.08);
+    --shadow-lg: 0 8px 32px rgba(30,27,22,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Epilogue',sans-serif; background:var(--bg); color:var(--text); height:100vh; overflow:hidden; display:flex; flex-direction:column; }
+
+  .header { height:58px; background:var(--surface); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 28px; justify-content:space-between; flex-shrink:0; }
+  .header-left { display:flex; align-items:center; gap:14px; }
+  .logo { font-family:'Fraunces',serif; font-size:15px; font-weight:600; color:var(--accent); }
+  .vline { width:1px; height:18px; background:var(--border2); }
+  .page-title { font-size:13px; font-weight:400; color:var(--text-dim); }
+  .header-right { display:flex; align-items:center; gap:10px; }
+  .angebote-count { font-family:'Fira Code',monospace; font-size:11px; color:var(--text-muted); background:var(--surface2); border:1px solid var(--border); padding:4px 10px; border-radius:20px; }
+
+  .main { display:flex; flex:1; overflow:hidden; }
+
+  .inbox-pane { width:280px; flex-shrink:0; border-right:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; background:var(--surface); }
+  .inbox-header { padding:14px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+  .inbox-title { font-family:'Fraunces',serif; font-size:13px; font-weight:500; color:var(--text-dim); }
+  .new-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .inbox-list { overflow-y:auto; flex:1; }
+  .inbox-list::-webkit-scrollbar { width:3px; }
+  .inbox-list::-webkit-scrollbar-thumb { background:var(--border2); border-radius:2px; }
+  .inbox-item { padding:13px 16px; border-bottom:1px solid var(--border); cursor:pointer; transition:background 0.12s; }
+  .inbox-item:hover { background:var(--surface2); }
+  .inbox-item.active { background:var(--accent-light); border-left:3px solid var(--accent); }
+  .inbox-item.done { opacity:0.5; }
+  .inbox-item-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px; }
+  .inbox-sender { font-size:13px; font-weight:600; color:var(--text); }
+  .inbox-time { font-family:'Fira Code',monospace; font-size:10px; color:var(--text-muted); }
+  .inbox-subject { font-size:11px; color:var(--text-dim); margin-bottom:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .inbox-tags { display:flex; gap:4px; flex-wrap:wrap; }
+  .tag { font-size:9px; font-weight:600; padding:2px 6px; border-radius:3px; text-transform:uppercase; letter-spacing:0.07em; font-family:'Fira Code',monospace; }
+  .tag-fahrzeug { background:var(--blue-light); color:var(--blue); }
+  .tag-gutachten { background:var(--yellow-light); color:var(--yellow); }
+  .tag-anfrage { background:var(--accent-light); color:var(--accent); }
+  .tag-erledigt { background:var(--green-light); color:var(--green); }
+
+  .work-pane { flex:1; display:flex; flex-direction:column; overflow:hidden; border-right:1px solid var(--border); }
+  .work-header { padding:14px 20px; border-bottom:1px solid var(--border); background:var(--surface); flex-shrink:0; display:flex; align-items:center; justify-content:space-between; }
+  .work-title { font-family:'Fraunces',serif; font-size:14px; font-weight:500; }
+  .work-body { flex:1; overflow-y:auto; padding:20px; }
+  .work-body::-webkit-scrollbar { width:3px; }
+  .work-body::-webkit-scrollbar-thumb { background:var(--border2); }
+
+  .email-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px; margin-bottom:16px; box-shadow:var(--shadow-sm); }
+  .email-meta { display:flex; gap:16px; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+  .email-meta-item { font-size:11px; color:var(--text-muted); }
+  .email-meta-item span { color:var(--text-dim); font-weight:600; }
+  .email-body-text { font-size:13px; line-height:1.75; color:var(--text-dim); white-space:pre-wrap; }
+
+  .ki-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:16px; box-shadow:var(--shadow-sm); }
+  .ki-card-header { padding:11px 16px; background:var(--surface2); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  .ki-label { font-family:'Fira Code',monospace; font-size:10px; font-weight:500; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; }
+  .ki-badge { font-size:10px; padding:2px 8px; background:var(--accent-light); color:var(--accent); border:1px solid var(--accent-mid); border-radius:3px; font-family:'Fira Code',monospace; }
+  .ki-card-body { padding:14px; }
+  .extracted-row { display:flex; align-items:center; gap:10px; padding:7px 10px; border-radius:6px; margin-bottom:5px; background:var(--surface2); border:1px solid var(--border); }
+  .extracted-row:last-child { margin-bottom:0; }
+  .extr-icon { font-size:13px; flex-shrink:0; }
+  .extr-label { font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.07em; font-family:'Fira Code',monospace; width:78px; flex-shrink:0; }
+  .extr-value { font-size:13px; font-weight:600; color:var(--text); flex:1; }
+  .extr-conf { font-size:9px; padding:2px 6px; border-radius:3px; font-family:'Fira Code',monospace; font-weight:500; }
+  .conf-high { background:var(--green-light); color:var(--green); }
+  .conf-mid { background:var(--yellow-light); color:var(--yellow); }
+
+  .positions-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden; box-shadow:var(--shadow-sm); }
+  .positions-header { padding:11px 16px; background:var(--surface2); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  .positions-title { font-family:'Fraunces',serif; font-size:13px; font-weight:500; }
+  .add-pos-btn { font-size:11px; font-weight:600; padding:4px 10px; background:var(--accent); color:white; border:none; border-radius:5px; cursor:pointer; font-family:'Epilogue',sans-serif; transition:all 0.15s; }
+  .add-pos-btn:hover { background:#b03f12; }
+  .positions-table { width:100%; border-collapse:collapse; }
+  .positions-table th { padding:8px 14px; text-align:left; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted); border-bottom:1px solid var(--border); background:var(--bg); font-family:'Fira Code',monospace; }
+  .positions-table td { padding:10px 14px; font-size:12px; border-bottom:1px solid var(--border); vertical-align:middle; }
+  .positions-table tr:last-child td { border-bottom:none; }
+  .pos-name { font-weight:600; color:var(--text); }
+  .pos-num { font-family:'Fira Code',monospace; font-size:10px; color:var(--text-muted); margin-top:2px; }
+  .price-input { background:var(--surface2); border:1px solid var(--border); border-radius:5px; padding:5px 8px; font-family:'Fira Code',monospace; font-size:12px; font-weight:500; color:var(--text); width:90px; outline:none; transition:border-color 0.15s; }
+  .price-input:focus { border-color:var(--accent); }
+  .availability { font-size:10px; font-weight:600; padding:2px 7px; border-radius:3px; font-family:'Fira Code',monospace; }
+  .avail-yes { background:var(--green-light); color:var(--green); }
+  .avail-check { background:var(--yellow-light); color:var(--yellow); }
+  .total-footer { padding:14px 16px; border-top:2px solid var(--border2); display:flex; justify-content:flex-end; align-items:center; gap:20px; background:var(--surface2); }
+  .total-label { font-size:12px; font-weight:600; color:var(--text-dim); }
+  .total-amount { font-family:'Fraunces',serif; font-size:22px; font-weight:600; color:var(--text); }
+
+  .preview-pane { width:320px; flex-shrink:0; display:flex; flex-direction:column; overflow:hidden; background:var(--surface); }
+  .preview-header { padding:14px 18px; border-bottom:1px solid var(--border); flex-shrink:0; }
+  .preview-title { font-family:'Fraunces',serif; font-size:13px; font-weight:500; color:var(--text-dim); }
+  .preview-body { flex:1; overflow-y:auto; padding:16px; }
+  .preview-body::-webkit-scrollbar { width:3px; }
+  .preview-body::-webkit-scrollbar-thumb { background:var(--border2); }
+
+  .email-preview { background:var(--bg); border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  .ep-header { padding:12px 14px; background:var(--surface); border-bottom:1px solid var(--border); }
+  .ep-field { font-size:11px; color:var(--text-muted); padding:3px 0; display:flex; gap:6px; }
+  .ep-field-label { font-weight:600; color:var(--text-dim); width:44px; flex-shrink:0; }
+  .ep-body { padding:14px; font-size:12px; line-height:1.7; color:var(--text-dim); white-space:pre-wrap; }
+  .ep-table { margin:8px 0; width:100%; border-collapse:collapse; font-size:11px; }
+  .ep-table th { padding:5px 8px; text-align:left; background:var(--surface3); border:1px solid var(--border2); font-weight:700; color:var(--text-dim); font-size:10px; text-transform:uppercase; letter-spacing:0.06em; }
+  .ep-table td { padding:6px 8px; border:1px solid var(--border); color:var(--text-dim); }
+  .ep-total-row td { font-weight:700; background:var(--surface2); color:var(--text); }
+
+  .preview-actions { padding:14px 18px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:8px; flex-shrink:0; }
+  .send-btn { width:100%; padding:11px; background:var(--accent); color:white; border:none; border-radius:8px; font-size:13px; font-weight:700; font-family:'Epilogue',sans-serif; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:7px; }
+  .send-btn:hover { background:#b03f12; transform:translateY(-1px); box-shadow:0 4px 12px rgba(201,78,30,0.3); }
+  .save-btn { width:100%; padding:9px; background:none; color:var(--text-dim); border:1px solid var(--border2); border-radius:8px; font-size:12px; font-weight:600; font-family:'Epilogue',sans-serif; cursor:pointer; transition:all 0.15s; display:flex; align-items:center; justify-content:center; gap:7px; }
+  .save-btn:hover { background:var(--surface2); }
+
+  .toast { position:fixed; bottom:24px; right:24px; background:var(--text); color:white; padding:12px 18px; border-radius:8px; font-size:13px; font-weight:500; display:flex; align-items:center; gap:8px; transform:translateY(60px); opacity:0; transition:all 0.25s ease; z-index:200; box-shadow:var(--shadow-lg); }
+  .toast.show { transform:translateY(0); opacity:1; }
+  .toast-icon { color:#4ade80; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo">OEM-Teile24</div>
+    <div class="vline"></div>
+    <div class="page-title">Angebotserstellung</div>
+  </div>
+  <div class="header-right">
+    <div class="angebote-count">3 offene Anfragen</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="inbox-pane">
+    <div class="inbox-header">
+      <div class="inbox-title">Eingehende Anfragen</div>
+      <div class="new-dot"></div>
+    </div>
+    <div class="inbox-list" id="inboxList"></div>
+  </div>
+
+  <div class="work-pane">
+    <div class="work-header">
+      <div class="work-title" id="workTitle">Anfrage bearbeiten</div>
+    </div>
+    <div class="work-body" id="workBody">
+      <div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-size:13px">Anfrage aus der Liste auswählen</div>
+    </div>
+  </div>
+
+  <div class="preview-pane">
+    <div class="preview-header">
+      <div class="preview-title">Angebots-Vorschau</div>
+    </div>
+    <div class="preview-body" id="previewBody">
+      <div style="text-align:center;padding:40px 16px;color:var(--text-muted);font-size:13px">Angebot wird hier angezeigt</div>
+    </div>
+    <div class="preview-actions" id="previewActions" style="display:none">
+      <button class="send-btn" onclick="sendAngebot()">✉ Angebot absenden</button>
+      <button class="save-btn" onclick="showToast('Als Entwurf gespeichert.')">◷ Als Entwurf speichern</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg"></span>
+</div>
+
+<script>
+const anfragen = [
+  {
+    id:1, sender:"Julia Neumann", email:"julia.n@gmx.de",
+    subject:"Versicherungsgutachten – Angebotsanfrage Audi A3",
+    time:"10:28", status:"offen", tags:["gutachten","anfrage"],
+    emailText:`Hallo,\n\nanbei schicke ich Ihnen das Gutachten meines Versicherers nach einem Hagelschaden.\n\nEs geht um folgende Teile für einen Audi A3 Sportback 2019:\n– Motorhaube\n– Kühlergrill\n– Hauptscheinwerfer links\n\nKönnten Sie mir bitte ein Angebot machen?\n\nBeste Grüße\nJulia Neumann`,
+    extracted:{
+      fahrzeug:"Audi A3 Sportback 2019", fahrgestellnr:"Nicht angegeben", schadensart:"Hagelschaden",
+      teile:[
+        {name:"Motorhaube Audi A3 Sportback", teilenr:"8V5 823 031", preis:"387.00", verfuegbar:true},
+        {name:"Kühlergrill Audi A3 Sportback", teilenr:"8V3 853 651 A", preis:"124.90", verfuegbar:true},
+        {name:"Hauptscheinwerfer links Audi A3", teilenr:"8V0 941 003 C", preis:"347.00", verfuegbar:null},
+      ]
+    }
+  },
+  {
+    id:2, sender:"Marcel Rübesam", email:"m.ruebesam@gmail.com",
+    subject:"Anfrage: VW Golf VII – Gutachten liegt vor",
+    time:"09:14", status:"offen", tags:["fahrzeug","gutachten"],
+    emailText:`Guten Morgen,\n\nich habe an meinem Golf VII Variant einen Unfallschaden und möchte die Versicherung selbst abrechnen.\n\nDas Gutachten listet folgende Teile auf:\n– Stoßstange vorne komplett\n– Kühlergrill\n– Kennzeichenhalter (2x)\n\nFahrgestellnummer: WVWZZZ1KZGP012345\n\nMit freundlichen Grüßen\nMarcel Rübesam`,
+    extracted:{
+      fahrzeug:"VW Golf VII Variant", fahrgestellnr:"WVWZZZ1KZGP012345", schadensart:"Unfallschaden vorne",
+      teile:[
+        {name:"Stoßstange vorne VW Golf VII", teilenr:"5G0 807 217 A", preis:"312.00", verfuegbar:true},
+        {name:"Kühlergrill VW Golf VII", teilenr:"5G0 853 651 H", preis:"89.90", verfuegbar:true},
+        {name:"Kennzeichenhalter Set (2x)", teilenr:"5ND 071 216", preis:"26.90", verfuegbar:true},
+      ]
+    }
+  },
+  {
+    id:3, sender:"Heiko Schmidt", email:"h.schmidt@web.de",
+    subject:"Skoda Octavia Teile – Preisanfrage",
+    time:"08:55", status:"erledigt", tags:["anfrage","erledigt"],
+    emailText:`Hallo,\n\nkönnten Sie mir Preise für folgende Teile für meinen Skoda Octavia III nennen:\n– Heckstoßstange\n– Heckleuchte rechts\n\nDanke!`,
+    extracted:{
+      fahrzeug:"Skoda Octavia III", fahrgestellnr:"Nicht angegeben", schadensart:"Allgemeine Anfrage",
+      teile:[
+        {name:"Heckstoßstange Skoda Octavia III", teilenr:"5E5 807 421", preis:"198.90", verfuegbar:true},
+        {name:"Heckleuchte rechts Octavia III", teilenr:"5E5 945 096 B", preis:"134.90", verfuegbar:true},
+      ]
+    }
+  }
+];
+
+let currentId = null;
+let prices = {};
+
+const tagLabels = {fahrzeug:'Fahrzeug', gutachten:'Gutachten', anfrage:'Anfrage', erledigt:'Erledigt'};
+
+function renderInbox() {
+  document.getElementById('inboxList').innerHTML = anfragen.map(a => `
+    <div class="inbox-item ${currentId===a.id?'active':''} ${a.status==='erledigt'?'done':''}" onclick="selectAnfrage(${a.id})">
+      <div class="inbox-item-top">
+        <div class="inbox-sender">${a.sender}</div>
+        <div class="inbox-time">${a.time}</div>
+      </div>
+      <div class="inbox-subject">${a.subject}</div>
+      <div class="inbox-tags">${a.tags.map(t=>`<span class="tag tag-${t}">${tagLabels[t]}</span>`).join('')}</div>
+    </div>
+  `).join('');
+}
+
+function selectAnfrage(id) {
+  currentId = id;
+  const a = anfragen.find(x => x.id === id);
+  prices = {};
+  a.extracted.teile.forEach((t,i) => { prices[i] = t.preis; });
+  renderInbox();
+  renderWork(a);
+  renderPreview(a);
+  document.getElementById('previewActions').style.display = 'flex';
+}
+
+function renderWork(a) {
+  document.getElementById('workTitle').textContent = `${a.sender} – ${a.extracted.fahrzeug}`;
+  const extrHtml = `
+    <div class="extracted-row"><span class="extr-icon">🚗</span><span class="extr-label">Fahrzeug</span><span class="extr-value">${a.extracted.fahrzeug}</span><span class="extr-conf conf-high">sicher</span></div>
+    <div class="extracted-row"><span class="extr-icon">🔑</span><span class="extr-label">Fahrg.-Nr.</span><span class="extr-value">${a.extracted.fahrgestellnr}</span><span class="extr-conf ${a.extracted.fahrgestellnr==='Nicht angegeben'?'conf-mid':'conf-high'}">${a.extracted.fahrgestellnr==='Nicht angegeben'?'fehlt':'sicher'}</span></div>
+    <div class="extracted-row"><span class="extr-icon">📋</span><span class="extr-label">Schaden</span><span class="extr-value">${a.extracted.schadensart}</span><span class="extr-conf conf-high">sicher</span></div>
+    <div class="extracted-row"><span class="extr-icon">📦</span><span class="extr-label">Positionen</span><span class="extr-value">${a.extracted.teile.length} Teile erkannt</span><span class="extr-conf conf-high">sicher</span></div>
+  `;
+  const posRows = a.extracted.teile.map((t,i) => `
+    <tr>
+      <td><div class="pos-name">${t.name}</div><div class="pos-num">${t.teilenr}</div></td>
+      <td><span class="availability ${t.verfuegbar===true?'avail-yes':'avail-check'}">${t.verfuegbar===true?'✓ Lager':'Prüfen'}</span></td>
+      <td><input class="price-input" type="text" value="${t.preis} €" oninput="updatePrice(${i}, this.value)"></td>
+      <td style="font-family:'Fira Code',monospace;font-size:11px;color:var(--text-muted)">1 Stk.</td>
+    </tr>
+  `).join('');
+
+  document.getElementById('workBody').innerHTML = `
+    <div class="email-card">
+      <div class="email-meta">
+        <div class="email-meta-item">Von: <span>${a.sender}</span></div>
+        <div class="email-meta-item">E-Mail: <span>${a.email}</span></div>
+        <div class="email-meta-item">Eingegangen: <span>Heute, ${a.time}</span></div>
+      </div>
+      <div class="email-body-text">${a.emailText}</div>
+    </div>
+    <div class="ki-card">
+      <div class="ki-card-header">
+        <div class="ki-label">⚡ KI-Extraktion</div>
+        <div class="ki-badge">automatisch erkannt</div>
+      </div>
+      <div class="ki-card-body">${extrHtml}</div>
+    </div>
+    <div class="positions-card">
+      <div class="positions-header">
+        <div class="positions-title">Angebotspositionen</div>
+        <button class="add-pos-btn" onclick="showToast('Position hinzufügen...')">+ Position</button>
+      </div>
+      <table class="positions-table">
+        <thead><tr><th>Artikel / OEM-Nr.</th><th>Verfügbarkeit</th><th>Preis (€)</th><th>Menge</th></tr></thead>
+        <tbody>${posRows}</tbody>
+      </table>
+      <div class="total-footer">
+        <span class="total-label">Gesamtbetrag</span>
+        <span class="total-amount" id="totalAmount">${calcTotal()} €</span>
+      </div>
+    </div>
+  `;
+}
+
+function calcTotal() {
+  return Object.values(prices).reduce((s,p) => s + parseFloat(p||0), 0).toFixed(2);
+}
+
+function updatePrice(idx, val) {
+  const num = parseFloat(val.replace(',','.').replace('€','').trim());
+  if (!isNaN(num)) prices[idx] = num.toFixed(2);
+  const el = document.getElementById('totalAmount');
+  if (el) el.textContent = calcTotal() + ' €';
+  const a = anfragen.find(x => x.id === currentId);
+  if (a) renderPreview(a);
+}
+
+function renderPreview(a) {
+  const total = calcTotal();
+  const tableRows = a.extracted.teile.map((t,i) => `
+    <tr><td>${t.name}</td><td style="text-align:center">1</td><td style="text-align:right;font-weight:600">${prices[i]||t.preis} €</td></tr>
+  `).join('');
+  document.getElementById('previewBody').innerHTML = `
+    <div class="email-preview">
+      <div class="ep-header">
+        <div class="ep-field"><span class="ep-field-label">An:</span><span class="ep-field-val">${a.sender} &lt;${a.email}&gt;</span></div>
+        <div class="ep-field"><span class="ep-field-label">Betreff:</span><span class="ep-field-val">Ihr Angebot – ${a.extracted.fahrzeug}</span></div>
+      </div>
+      <div class="ep-body">Guten Tag ${a.sender.split(' ')[0]},
+
+vielen Dank für Ihre Anfrage. Wir haben Ihr Fahrzeug (${a.extracted.fahrzeug}) geprüft und können Ihnen folgende Originalteile anbieten:
+
+<table class="ep-table"><thead><tr><th>Artikel</th><th>Menge</th><th>Preis</th></tr></thead><tbody>${tableRows}<tr class="ep-total-row"><td colspan="2">Gesamtbetrag</td><td style="text-align:right">${total} €</td></tr></tbody></table>
+
+Lieferzeit: 1–3 Werktage.
+
+Bei Fragen stehen wir gerne zur Verfügung.
+
+Mit freundlichen Grüßen
+OEM-Teile24
+info@oem-teile24.de</div>
+    </div>
+  `;
+}
+
+function sendAngebot() {
+  const a = anfragen.find(x => x.id === currentId);
+  if (a) { a.status = 'erledigt'; a.tags = a.tags.filter(t => t!=='anfrage').concat('erledigt'); }
+  showToast(`Angebot an ${a.sender} gesendet.`);
+  renderInbox();
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+renderInbox();
+selectAnfrage(1);
+</script>
+</body>
+</html>

@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEM-Teile24 – E-Mail Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #161616;
+    --surface2: #1e1e1e;
+    --surface3: #262626;
+    --border: #2a2a2a;
+    --border2: #333;
+    --text: #e8e8e8;
+    --text-muted: #666;
+    --text-dim: #999;
+    --accent: #e84c1e;
+    --accent-dim: rgba(232, 76, 30, 0.12);
+    --green: #22c55e;
+    --green-dim: rgba(34, 197, 94, 0.1);
+    --yellow: #eab308;
+    --yellow-dim: rgba(234, 179, 8, 0.1);
+    --blue: #3b82f6;
+    --blue-dim: rgba(59, 130, 246, 0.1);
+    --gray-dim: rgba(150,150,150,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 52px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    flex-shrink: 0;
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .divider-v {
+    width: 1px;
+    height: 16px;
+    background: var(--border2);
+  }
+
+  .topbar-title {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .sync-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: none;
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .sync-btn:hover { border-color: var(--border2); color: var(--text-dim); }
+
+  .sync-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* STATS BAR */
+  .statsbar {
+    display: flex;
+    gap: 1px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    background: var(--border);
+  }
+
+  .stat {
+    flex: 1;
+    padding: 12px 20px;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .stat-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .stat-info { display: flex; flex-direction: column; gap: 2px; }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .stat-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .stat.offen .stat-number { color: var(--accent); }
+  .stat.bearbeitung .stat-number { color: var(--yellow); }
+  .stat.erledigt .stat-number { color: var(--green); }
+  .stat.gesamt .stat-number { color: var(--text-dim); }
+
+  /* MAIN LAYOUT */
+  .main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* EMAIL LIST */
+  .email-list {
+    width: 420px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .list-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    flex-shrink: 0;
+  }
+
+  .list-header-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 4px;
+  }
+
+  .filter-tab {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    color: var(--text-muted);
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .filter-tab:hover { color: var(--text-dim); border-color: var(--border); }
+  .filter-tab.active { background: var(--surface3); color: var(--text); border-color: var(--border2); }
+
+  .email-items {
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .email-items::-webkit-scrollbar { width: 3px; }
+  .email-items::-webkit-scrollbar-track { background: transparent; }
+  .email-items::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  .email-item {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+    position: relative;
+  }
+
+  .email-item:hover { background: var(--surface2); }
+  .email-item.active { background: var(--surface3); border-left: 2px solid var(--accent); }
+  .email-item.unread .email-sender::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 7px;
+    vertical-align: middle;
+    margin-top: -1px;
+  }
+
+  .email-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 5px;
+  }
+
+  .email-sender {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .email-time {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  .email-subject {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 7px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .email-item-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .category-tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .cat-produkt { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
+  .cat-bestellung { background: var(--yellow-dim); color: var(--yellow); border: 1px solid rgba(234,179,8,0.2); }
+  .cat-stornierung { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(232,76,30,0.2); }
+  .cat-sonstiges { background: var(--gray-dim); color: var(--text-muted); border: 1px solid var(--border); }
+
+  .status-badge {
+    font-size: 10px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .status-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+  }
+
+  .status-dot.offen { background: var(--accent); }
+  .status-dot.bearbeitung { background: var(--yellow); }
+  .status-dot.erledigt { background: var(--green); }
+
+  /* DETAIL PANEL */
+  .detail-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .detail-empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--text-muted);
+  }
+
+  .detail-empty-icon {
+    font-size: 32px;
+    opacity: 0.3;
+  }
+
+  .detail-empty-text {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .detail-content {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .detail-content.visible { display: flex; }
+
+  .detail-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .detail-header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .detail-subject {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .detail-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .detail-meta-item {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .detail-meta-item span { color: var(--text-dim); }
+
+  .detail-body {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+  }
+
+  .detail-body::-webkit-scrollbar { width: 3px; }
+  .detail-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  .email-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    max-width: 640px;
+    white-space: pre-wrap;
+  }
+
+  .ki-box {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    max-width: 640px;
+  }
+
+  .ki-box-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .ki-box-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* ACTION BAR */
+  .action-bar {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    background: var(--surface);
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+
+  .btn-primary:hover { background: #d44419; }
+
+  .btn-secondary {
+    background: var(--surface3);
+    color: var(--text-dim);
+    border: 1px solid var(--border2);
+  }
+
+  .btn-secondary:hover { background: var(--surface2); color: var(--text); }
+
+  .btn-ghost {
+    background: none;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+  }
+
+  .btn-ghost:hover { color: var(--text-dim); border-color: var(--border); }
+
+  .btn-erledigt {
+    background: var(--green-dim);
+    color: var(--green);
+    border: 1px solid rgba(34,197,94,0.2);
+    margin-left: auto;
+  }
+
+  .btn-erledigt:hover { background: rgba(34,197,94,0.18); }
+
+  /* TEMPLATE OVERLAY */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .overlay.visible { display: flex; }
+
+  .overlay-card {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    width: 560px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.2s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .overlay-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .overlay-title {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .overlay-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 2px 6px;
+  }
+
+  .overlay-close:hover { color: var(--text); }
+
+  .overlay-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .overlay-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .overlay-input {
+    width: 100%;
+    background: var(--surface3);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    margin-bottom: 14px;
+    transition: border-color 0.15s;
+  }
+
+  .overlay-input:focus { border-color: var(--accent); }
+
+  .overlay-textarea {
+    width: 100%;
+    background: var(--surface3);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    resize: vertical;
+    min-height: 160px;
+    line-height: 1.6;
+    transition: border-color 0.15s;
+  }
+
+  .overlay-textarea:focus { border-color: var(--accent); }
+
+  .overlay-footer {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--surface3);
+    border: 1px solid var(--border2);
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transform: translateY(60px);
+    opacity: 0;
+    transition: all 0.25s ease;
+    z-index: 200;
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-icon { color: var(--green); font-size: 15px; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo">OEM-TEILE24</div>
+    <div class="divider-v"></div>
+    <div class="topbar-title">E-Mail Dashboard</div>
+  </div>
+  <div class="topbar-right">
+    <button class="sync-btn" onclick="showToast('Synchronisierung mit Outlook...')">
+      <div class="sync-dot"></div>
+      Outlook synchronisiert
+    </button>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="statsbar">
+  <div class="stat offen">
+    <div class="stat-number">4</div>
+    <div class="stat-info">
+      <div class="stat-label">Offen</div>
+      <div class="stat-sub">Warten auf Antwort</div>
+    </div>
+  </div>
+  <div class="stat bearbeitung">
+    <div class="stat-number">2</div>
+    <div class="stat-info">
+      <div class="stat-label">In Bearbeitung</div>
+      <div class="stat-sub">Antwort vorbereitet</div>
+    </div>
+  </div>
+  <div class="stat erledigt">
+    <div class="stat-number">11</div>
+    <div class="stat-info">
+      <div class="stat-label">Erledigt</div>
+      <div class="stat-sub">Heute</div>
+    </div>
+  </div>
+  <div class="stat gesamt">
+    <div class="stat-number">17</div>
+    <div class="stat-info">
+      <div class="stat-label">Gesamt</div>
+      <div class="stat-sub">Heute eingegangen</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- EMAIL LIST -->
+  <div class="email-list">
+    <div class="list-header">
+      <div class="list-header-title">Posteingang</div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="setFilter(this, 'alle')">Alle</button>
+        <button class="filter-tab" onclick="setFilter(this, 'offen')">Offen</button>
+        <button class="filter-tab" onclick="setFilter(this, 'bearbeitung')">Aktiv</button>
+      </div>
+    </div>
+    <div class="email-items" id="emailList"></div>
+  </div>
+
+  <!-- DETAIL PANEL -->
+  <div class="detail-panel">
+    <div class="detail-empty" id="detailEmpty">
+      <div class="detail-empty-icon">✉</div>
+      <div class="detail-empty-text">E-Mail auswählen</div>
+    </div>
+
+    <div class="detail-content" id="detailContent">
+      <div class="detail-header">
+        <div class="detail-header-top">
+          <div class="detail-subject" id="detailSubject"></div>
+          <span class="category-tag" id="detailCat"></span>
+        </div>
+        <div class="detail-meta">
+          <div class="detail-meta-item">Von: <span id="detailFrom"></span></div>
+          <div class="detail-meta-item">·</div>
+          <div class="detail-meta-item" id="detailTime"></div>
+          <div class="detail-meta-item">·</div>
+          <div class="detail-meta-item" id="detailStatus"></div>
+        </div>
+      </div>
+      <div class="detail-body">
+        <div class="email-text" id="detailBody"></div>
+        <div class="ki-box" id="kiBox">
+          <div class="ki-box-label">⚡ KI-Analyse</div>
+          <div class="ki-box-text" id="kiText"></div>
+        </div>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="openTemplate()">✉ Vorlage laden</button>
+        <button class="btn btn-secondary" onclick="showToast('Wird als In Bearbeitung markiert...')">Zurückstellen</button>
+        <button class="btn btn-ghost" onclick="showToast('Weitergeleitet.')">Weiterleiten</button>
+        <button class="btn btn-erledigt" onclick="markErledigt()">✓ Erledigt</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TEMPLATE OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="overlay-card">
+    <div class="overlay-header">
+      <div class="overlay-title">Antwort erstellen</div>
+      <button class="overlay-close" onclick="closeTemplate()">×</button>
+    </div>
+    <div class="overlay-body">
+      <div class="overlay-label">An</div>
+      <input class="overlay-input" id="overlayTo" readonly>
+      <div class="overlay-label">Betreff</div>
+      <input class="overlay-input" id="overlaySubject">
+      <div class="overlay-label">Nachricht</div>
+      <textarea class="overlay-textarea" id="overlayBody"></textarea>
+    </div>
+    <div class="overlay-footer">
+      <button class="btn btn-ghost" onclick="closeTemplate()">Abbrechen</button>
+      <button class="btn btn-primary" onclick="sendEmail()">✉ Absenden</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg"></span>
+</div>
+
+<script>
+const emails = [
+  {
+    id: 1,
+    sender: "Marcel Hoffmann",
+    email: "m.hoffmann@gmail.com",
+    subject: "Passt der Kotflügel zu meinem Golf VII?",
+    time: "09:14",
+    category: "produkt",
+    status: "offen",
+    unread: true,
+    body: `Guten Morgen,
+
+ich interessiere mich für den Kotflügel vorne links für einen VW Golf VII Variant Bj. 2016.
+
+Meine Fahrgestellnummer lautet: WVWZZZ1KZGP012345
+
+Könnten Sie bitte prüfen, ob das Teil passt? Ich würde gerne noch diese Woche bestellen.
+
+Mit freundlichen Grüßen
+Marcel Hoffmann`,
+    ki: "Produktanfrage mit Fahrgestellnummer. Passgenauigkeit prüfen und Verfügbarkeit bestätigen. Empfohlen: kurze Bestätigung + Lieferzeit nennen."
+  },
+  {
+    id: 2,
+    sender: "Sandra Krüger",
+    email: "sandra.krueger@web.de",
+    subject: "Wann kommt mein Paket an?",
+    time: "09:41",
+    category: "bestellung",
+    status: "offen",
+    unread: true,
+    body: `Hallo,
+
+ich habe am Montag Bremsscheiben bestellt (Bestellnummer 00125-08891) und bisher keine Versandbestätigung erhalten.
+
+Könnten Sie mir sagen, wann ich mit der Lieferung rechnen kann?
+
+Danke und Grüße
+Sandra Krüger`,
+    ki: "Lieferstatusanfrage. Bestellnummer 00125-08891 vorhanden. Sendungsstatus in DHL prüfen und Trackingnummer mitteilen."
+  },
+  {
+    id: 3,
+    sender: "Thomas Bauer",
+    email: "t.bauer@hotmail.com",
+    subject: "Stornierung Bestellung 00124-07732",
+    time: "10:03",
+    category: "stornierung",
+    status: "bearbeitung",
+    unread: false,
+    body: `Guten Tag,
+
+ich möchte meine Bestellung 00124-07732 stornieren. Ich habe das falsche Teil bestellt – es handelt sich um einen Schalldämpfer für ein falsches Modell.
+
+Bitte bestätigen Sie die Stornierung und informieren Sie mich über die Rückerstattung.
+
+Freundliche Grüße
+Thomas Bauer`,
+    ki: "Stornierungsanfrage. Bestellnummer 00124-07732. Prüfen ob Versand bereits erfolgt. Falls nicht: Stornierung bestätigen und Rückerstattungszeitraum nennen."
+  },
+  {
+    id: 4,
+    sender: "Julia Neumann",
+    email: "julia.n@gmx.de",
+    subject: "Versicherungsgutachten – Angebotsanfrage",
+    time: "10:28",
+    category: "produkt",
+    status: "offen",
+    unread: true,
+    body: `Hallo,
+
+anbei schicke ich Ihnen das Gutachten meines Versicherers nach einem Hagelschaden.
+
+Es geht um folgende Teile für einen Audi A3 Sportback 2019:
+– Motorhaube
+– Kühlergrill
+– Hauptscheinwerfer links
+
+Können Sie mir ein Angebot machen?
+
+Beste Grüße
+Julia Neumann`,
+    ki: "Angebotsanfrage mit Gutachten. 3 Teile für Audi A3 Sportback 2019. Verfügbarkeit und Gesamtpreis kalkulieren – ähnlich wie bei Marcel Rübesam laut Bewertungen häufiger Anfragetypus."
+  },
+  {
+    id: 5,
+    sender: "Klaus Wendt",
+    email: "k.wendt@t-online.de",
+    subject: "Rechnung fehlt in der Bestellbestätigung",
+    time: "11:15",
+    category: "sonstiges",
+    status: "offen",
+    unread: true,
+    body: `Guten Tag,
+
+ich habe heute meine Bestellung erhalten, jedoch keine Rechnung beigelegt. Ich benötige diese für meine Steuer.
+
+Bestellnummer: 00125-09012
+
+Können Sie mir die Rechnung bitte per E-Mail zusenden?
+
+Dankeschön
+Klaus Wendt`,
+    ki: "Rechnung angefordert. Bestellnummer 00125-09012. Rechnung aus System exportieren und per E-Mail zusenden."
+  },
+  {
+    id: 6,
+    sender: "Anna Fischer",
+    email: "a.fischer@gmail.com",
+    subject: "AW: Ihre Bestellung – Tracking Update",
+    time: "11:52",
+    category: "bestellung",
+    status: "bearbeitung",
+    unread: false,
+    body: `Danke für die schnelle Antwort! 
+
+Ich habe die Trackingnummer erhalten und das Paket ist bereits unterwegs. Alles passt.
+
+Viele Grüße
+Anna Fischer`,
+    ki: "Positive Rückmeldung auf vorherige Antwort. Kein Handlungsbedarf – als erledigt markieren."
+  }
+];
+
+const templates = {
+  produkt: {
+    subject: "Re: {subject}",
+    body: `Guten Tag {name},
+
+vielen Dank für Ihre Anfrage.
+
+Wir haben Ihre Fahrgestellnummer geprüft und können Ihnen mitteilen, dass das gewünschte Teil für Ihr Fahrzeug verfügbar ist.
+
+[Teiledetails und Preis hier eintragen]
+
+Die Lieferzeit beträgt in der Regel 1–3 Werktage. Für lackierte Teile 5–10 Werktage.
+
+Bei weiteren Fragen stehen wir Ihnen gerne zur Verfügung.
+
+Mit freundlichen Grüßen
+OEM-Teile24
+info@oem-teile24.de`
+  },
+  bestellung: {
+    subject: "Re: {subject}",
+    body: `Guten Tag {name},
+
+vielen Dank für Ihre Nachricht.
+
+Ihre Bestellung wurde am [Datum] versandt. Ihre DHL-Trackingnummer lautet: [TRACKINGNUMMER]
+
+Den aktuellen Lieferstatus können Sie hier einsehen:
+https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html
+
+Bei Fragen stehen wir Ihnen gerne zur Verfügung.
+
+Mit freundlichen Grüßen
+OEM-Teile24`
+  },
+  stornierung: {
+    subject: "Re: {subject}",
+    body: `Guten Tag {name},
+
+wir haben Ihre Stornierungsanfrage erhalten.
+
+[Falls noch nicht versandt:] Ihre Bestellung wurde erfolgreich storniert. Die Rückerstattung erfolgt innerhalb von 3–5 Werktagen auf Ihr ursprüngliches Zahlungsmittel.
+
+[Falls bereits versandt:] Ihr Paket befindet sich leider bereits im Versand. Bitte nehmen Sie die Lieferung an und senden Sie das Teil anschließend zurück. Wir erstatten Ihnen den vollen Betrag nach Eingang.
+
+Mit freundlichen Grüßen
+OEM-Teile24`
+  },
+  sonstiges: {
+    subject: "Re: {subject}",
+    body: `Guten Tag {name},
+
+vielen Dank für Ihre Nachricht.
+
+[Antwort hier eintragen]
+
+Mit freundlichen Grüßen
+OEM-Teile24
+info@oem-teile24.de`
+  }
+};
+
+let currentEmail = null;
+let currentFilter = 'alle';
+
+function getCatClass(cat) {
+  return { produkt: 'cat-produkt', bestellung: 'cat-bestellung', stornierung: 'cat-stornierung', sonstiges: 'cat-sonstiges' }[cat];
+}
+
+function getCatLabel(cat) {
+  return { produkt: 'Produktfrage', bestellung: 'Bestellung', stornierung: 'Stornierung', sonstiges: 'Sonstiges' }[cat];
+}
+
+function renderList() {
+  const list = document.getElementById('emailList');
+  const filtered = currentFilter === 'alle' ? emails : emails.filter(e => e.status === currentFilter);
+  list.innerHTML = filtered.map(e => `
+    <div class="email-item ${e.unread ? 'unread' : ''} ${currentEmail && currentEmail.id === e.id ? 'active' : ''}"
+         onclick="selectEmail(${e.id})">
+      <div class="email-item-top">
+        <div class="email-sender">${e.sender}</div>
+        <div class="email-time">${e.time}</div>
+      </div>
+      <div class="email-subject">${e.subject}</div>
+      <div class="email-item-bottom">
+        <span class="category-tag ${getCatClass(e.category)}">${getCatLabel(e.category)}</span>
+        <div class="status-badge">
+          <div class="status-dot ${e.status}"></div>
+          ${{ offen: 'Offen', bearbeitung: 'In Bearbeitung', erledigt: 'Erledigt' }[e.status]}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectEmail(id) {
+  currentEmail = emails.find(e => e.id === id);
+  currentEmail.unread = false;
+
+  document.getElementById('detailEmpty').style.display = 'none';
+  document.getElementById('detailContent').classList.add('visible');
+
+  document.getElementById('detailSubject').textContent = currentEmail.subject;
+  document.getElementById('detailCat').textContent = getCatLabel(currentEmail.category);
+  document.getElementById('detailCat').className = `category-tag ${getCatClass(currentEmail.category)}`;
+  document.getElementById('detailFrom').textContent = `${currentEmail.sender} <${currentEmail.email}>`;
+  document.getElementById('detailTime').textContent = `Heute, ${currentEmail.time} Uhr`;
+  document.getElementById('detailStatus').textContent = { offen: '🔴 Offen', bearbeitung: '🟡 In Bearbeitung', erledigt: '🟢 Erledigt' }[currentEmail.status];
+  document.getElementById('detailBody').textContent = currentEmail.body;
+  document.getElementById('kiText').textContent = currentEmail.ki;
+
+  renderList();
+}
+
+function setFilter(btn, filter) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderList();
+}
+
+function openTemplate() {
+  if (!currentEmail) return;
+  const t = templates[currentEmail.category];
+  const firstName = currentEmail.sender.split(' ')[0];
+  document.getElementById('overlayTo').value = `${currentEmail.sender} <${currentEmail.email}>`;
+  document.getElementById('overlaySubject').value = t.subject.replace('{subject}', currentEmail.subject);
+  document.getElementById('overlayBody').value = t.body.replace('{name}', firstName);
+  document.getElementById('overlay').classList.add('visible');
+}
+
+function closeTemplate() {
+  document.getElementById('overlay').classList.remove('visible');
+}
+
+function sendEmail() {
+  closeTemplate();
+  currentEmail.status = 'erledigt';
+  currentEmail.unread = false;
+  showToast('Antwort wurde versendet.');
+  renderList();
+  document.getElementById('detailStatus').textContent = '🟢 Erledigt';
+}
+
+function markErledigt() {
+  if (!currentEmail) return;
+  currentEmail.status = 'erledigt';
+  showToast('Als erledigt markiert.');
+  renderList();
+  document.getElementById('detailStatus').textContent = '🟢 Erledigt';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// Init
+renderList();
+selectEmail(1);
+</script>
+</body>
+</html>

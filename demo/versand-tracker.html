@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEM-Teile24 – Versand-Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --surface: #ffffff;
+    --surface2: #faf9f7;
+    --surface3: #f0ede8;
+    --border: #e5e0d8;
+    --border2: #d8d2c8;
+    --text: #1a1714;
+    --text-muted: #9a9188;
+    --text-dim: #6b6358;
+    --accent: #c84b1a;
+    --accent-light: #f5ede8;
+    --accent-mid: rgba(200,75,26,0.12);
+    --green: #1a7a4a;
+    --green-light: #e8f5ee;
+    --yellow: #9a6c00;
+    --yellow-light: #fdf5e0;
+    --blue: #1a4d8a;
+    --blue-light: #e8f0fa;
+    --gray-light: #f0ede8;
+    --shadow: 0 1px 3px rgba(26,23,20,0.08), 0 4px 16px rgba(26,23,20,0.04);
+    --shadow-hover: 0 2px 8px rgba(26,23,20,0.12), 0 8px 24px rgba(26,23,20,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Mulish', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .sep {
+    width: 1px;
+    height: 18px;
+    background: var(--border2);
+  }
+
+  .header-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .btn-sync {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Mulish', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-sync:hover { background: #b03f12; transform: translateY(-1px); }
+
+  /* STATS */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 24px 32px 0;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+  }
+
+  .stat-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-1px); }
+
+  .stat-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .stat-icon.versandt { background: var(--blue-light); }
+  .stat-icon.unterwegs { background: var(--yellow-light); }
+  .stat-icon.zugestellt { background: var(--green-light); }
+  .stat-icon.problem { background: var(--accent-light); }
+
+  .stat-info { flex: 1; }
+
+  .stat-n {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+
+  .stat-n.blue { color: var(--blue); }
+  .stat-n.yellow { color: var(--yellow); }
+  .stat-n.green { color: var(--green); }
+  .stat-n.red { color: var(--accent); }
+
+  .stat-lbl {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* MAIN CONTENT */
+  .content {
+    padding: 24px 32px 40px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* TABLE CARD */
+  .table-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .table-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .table-header-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .filter-chip {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: 'Mulish', sans-serif;
+    transition: all 0.15s;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .filter-chip:hover { border-color: var(--border2); color: var(--text-dim); }
+  .filter-chip.active { background: var(--text); color: white; border-color: var(--text); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead th {
+    padding: 10px 20px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+  tbody tr.selected { background: var(--accent-light); }
+
+  tbody td {
+    padding: 13px 20px;
+    font-size: 13px;
+    vertical-align: middle;
+  }
+
+  .order-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .customer-name { font-weight: 600; color: var(--text); }
+  .customer-email { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  .artikel {
+    font-size: 12px;
+    color: var(--text-dim);
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    white-space: nowrap;
+  }
+
+  .status-pill::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .pill-versandt { background: var(--blue-light); color: var(--blue); }
+  .pill-versandt::before { background: var(--blue); }
+  .pill-unterwegs { background: var(--yellow-light); color: var(--yellow); }
+  .pill-unterwegs::before { background: var(--yellow); animation: blink 1.5s infinite; }
+  .pill-zugestellt { background: var(--green-light); color: var(--green); }
+  .pill-zugestellt::before { background: var(--green); }
+  .pill-problem { background: var(--accent-light); color: var(--accent); }
+  .pill-problem::before { background: var(--accent); }
+  .pill-ausstehend { background: var(--gray-light); color: var(--text-muted); }
+  .pill-ausstehend::before { background: var(--text-muted); }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border: 1px solid var(--border2);
+    border-radius: 5px;
+    background: none;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-family: 'Mulish', sans-serif;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .action-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .action-btn.sent { background: var(--green-light); color: var(--green); border-color: rgba(26,122,74,0.3); cursor: default; }
+
+  /* DETAIL CARD */
+  .detail-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    position: sticky;
+    top: 80px;
+  }
+
+  .detail-card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .detail-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  .detail-card-body {
+    padding: 20px;
+  }
+
+  .detail-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .detail-order-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .detail-customer {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .detail-email {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .detail-section-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .detail-row:last-child { border-bottom: none; }
+  .detail-row-label { color: var(--text-muted); font-weight: 500; }
+  .detail-row-value { font-weight: 600; text-align: right; }
+
+  .tracking-box {
+    margin-top: 16px;
+    padding: 12px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .tracking-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--blue);
+    word-break: break-all;
+    margin-top: 4px;
+  }
+
+  .timeline {
+    margin-top: 16px;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 12px;
+    padding-bottom: 14px;
+    position: relative;
+  }
+
+  .timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 14px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border2);
+  }
+
+  .timeline-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 2px solid var(--border2);
+    background: var(--surface);
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-mid);
+  }
+
+  .timeline-dot.done { background: var(--green); border-color: var(--green); }
+
+  .timeline-text { font-size: 12px; line-height: 1.5; }
+  .timeline-label { font-weight: 600; color: var(--text); }
+  .timeline-time { color: var(--text-muted); font-size: 11px; font-family: 'JetBrains Mono', monospace; }
+
+  .btn-send-mail {
+    width: 100%;
+    margin-top: 16px;
+    padding: 11px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Mulish', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  }
+
+  .btn-send-mail:hover { background: #b03f12; transform: translateY(-1px); }
+  .btn-send-mail:disabled { background: var(--green); cursor: default; transform: none; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--text);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transform: translateY(60px);
+    opacity: 0;
+    transition: all 0.25s ease;
+    z-index: 200;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-icon { color: #4ade80; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,23,20,0.5);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    width: 520px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    animation: modalIn 0.2s ease;
+    overflow: hidden;
+  }
+
+  @keyframes modalIn {
+    from { transform: scale(0.96) translateY(8px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  .modal-header {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+  }
+
+  .modal-close:hover { color: var(--text); }
+
+  .modal-body { padding: 22px; }
+
+  .modal-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .modal-input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border2);
+    border-radius: 7px;
+    background: var(--surface2);
+    font-family: 'Mulish', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    margin-bottom: 14px;
+    transition: border-color 0.15s;
+  }
+
+  .modal-input:focus { border-color: var(--accent); }
+
+  .modal-textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border2);
+    border-radius: 7px;
+    background: var(--surface2);
+    font-family: 'Mulish', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.6;
+    transition: border-color 0.15s;
+  }
+
+  .modal-textarea:focus { border-color: var(--accent); }
+
+  .modal-footer {
+    padding: 14px 22px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    background: var(--surface2);
+  }
+
+  .btn-cancel {
+    padding: 8px 16px;
+    border: 1px solid var(--border2);
+    border-radius: 7px;
+    background: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-family: 'Mulish', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .btn-cancel:hover { background: var(--surface3); }
+
+  .btn-confirm {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 7px;
+    background: var(--accent);
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    font-family: 'Mulish', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .btn-confirm:hover { background: #b03f12; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo">OEM-Teile24</div>
+    <div class="sep"></div>
+    <div class="header-title">Versand-Tracker</div>
+  </div>
+  <div class="header-right">
+    <div class="header-date" id="currentDate"></div>
+    <button class="btn-sync" onclick="showToast('DHL-Daten werden synchronisiert...')">↻ DHL Sync</button>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-icon versandt">📦</div>
+    <div class="stat-info">
+      <div class="stat-n blue">8</div>
+      <div class="stat-lbl">Versandt</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon unterwegs">🚚</div>
+    <div class="stat-info">
+      <div class="stat-n yellow">14</div>
+      <div class="stat-lbl">Unterwegs</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon zugestellt">✓</div>
+    <div class="stat-info">
+      <div class="stat-n green">31</div>
+      <div class="stat-lbl">Zugestellt</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon problem">⚠</div>
+    <div class="stat-info">
+      <div class="stat-n red">2</div>
+      <div class="stat-lbl">Problem</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <!-- TABLE -->
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-header-title">Aktive Sendungen</div>
+      <div class="filter-row">
+        <button class="filter-chip active" onclick="filterTable(this,'alle')">Alle</button>
+        <button class="filter-chip" onclick="filterTable(this,'unterwegs')">Unterwegs</button>
+        <button class="filter-chip" onclick="filterTable(this,'problem')">Problem</button>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Bestellung</th>
+          <th>Kunde</th>
+          <th>Artikel</th>
+          <th>Status</th>
+          <th>Versand</th>
+          <th>Bestätigung</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- DETAIL -->
+  <div class="detail-card">
+    <div class="detail-card-header">
+      <div class="detail-card-title">Sendungsdetail</div>
+    </div>
+    <div class="detail-card-body" id="detailBody">
+      <div class="detail-empty-state">
+        Bestellung auswählen<br>für Details
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Versandbestätigung senden</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-label">An</div>
+      <input class="modal-input" id="modalTo" readonly>
+      <div class="modal-label">Betreff</div>
+      <input class="modal-input" id="modalSubject">
+      <div class="modal-label">Nachricht</div>
+      <textarea class="modal-textarea" id="modalBody"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Abbrechen</button>
+      <button class="btn-confirm" onclick="confirmSend()">✉ Jetzt senden</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg"></span>
+</div>
+
+<script>
+const orders = [
+  {
+    id: 1,
+    orderNum: "00125-09101",
+    customer: "Thomas Bauer",
+    email: "t.bauer@hotmail.com",
+    artikel: "VW Kotflügel vorne links",
+    status: "unterwegs",
+    versandDatum: "07.05.2026",
+    tracking: "1Z999AA1012345678",
+    confirmSent: false,
+    timeline: [
+      { label: "Paket übergeben", time: "07.05., 14:30", done: true, active: false },
+      { label: "Im Paketzentrum Erfurt", time: "07.05., 22:15", done: true, active: false },
+      { label: "In Zustellung", time: "08.05., 07:45", done: false, active: true },
+      { label: "Zugestellt", time: "Ausstehend", done: false, active: false },
+    ]
+  },
+  {
+    id: 2,
+    orderNum: "00125-09088",
+    customer: "Sandra Krüger",
+    email: "sandra.krueger@web.de",
+    artikel: "Bremsenset VW Golf VII",
+    status: "unterwegs",
+    versandDatum: "07.05.2026",
+    tracking: "1Z999AA1098765432",
+    confirmSent: true,
+    timeline: [
+      { label: "Paket übergeben", time: "07.05., 15:10", done: true, active: false },
+      { label: "Im Paketzentrum Leipzig", time: "07.05., 23:00", done: true, active: false },
+      { label: "In Zustellung", time: "08.05., 08:20", done: false, active: true },
+      { label: "Zugestellt", time: "Ausstehend", done: false, active: false },
+    ]
+  },
+  {
+    id: 3,
+    orderNum: "00125-09072",
+    customer: "Julia Neumann",
+    email: "julia.n@gmx.de",
+    artikel: "Audi A3 Motorhaube",
+    status: "versandt",
+    versandDatum: "08.05.2026",
+    tracking: "1Z999AA1055512399",
+    confirmSent: false,
+    timeline: [
+      { label: "Paket übergeben", time: "08.05., 11:00", done: true, active: false },
+      { label: "Im Paketzentrum Erfurt", time: "Ausstehend", done: false, active: true },
+      { label: "In Zustellung", time: "Ausstehend", done: false, active: false },
+      { label: "Zugestellt", time: "Ausstehend", done: false, active: false },
+    ]
+  },
+  {
+    id: 4,
+    orderNum: "00125-09055",
+    customer: "Marcel Hoffmann",
+    email: "m.hoffmann@gmail.com",
+    artikel: "Skoda Emblem schwarz vorne",
+    status: "problem",
+    versandDatum: "05.05.2026",
+    tracking: "1Z999AA1033398012",
+    confirmSent: true,
+    timeline: [
+      { label: "Paket übergeben", time: "05.05., 13:00", done: true, active: false },
+      { label: "Im Paketzentrum Erfurt", time: "05.05., 20:30", done: true, active: false },
+      { label: "Zustellung fehlgeschlagen", time: "06.05., 10:00", done: false, active: true },
+      { label: "Paket im Paketshop", time: "06.05., 12:00", done: false, active: false },
+    ]
+  },
+  {
+    id: 5,
+    orderNum: "00125-09044",
+    customer: "Klaus Wendt",
+    email: "k.wendt@t-online.de",
+    artikel: "Original VW AdBlue 10L",
+    status: "problem",
+    versandDatum: "04.05.2026",
+    tracking: "1Z999AA1011187654",
+    confirmSent: true,
+    timeline: [
+      { label: "Paket übergeben", time: "04.05., 14:00", done: true, active: false },
+      { label: "Im Paketzentrum Halle", time: "04.05., 21:45", done: true, active: false },
+      { label: "Zustellung fehlgeschlagen", time: "05.05., 09:30", done: false, active: true },
+      { label: "Rücksendung eingeleitet", time: "07.05., 08:00", done: false, active: false },
+    ]
+  },
+  {
+    id: 6,
+    orderNum: "00125-09031",
+    customer: "Anna Fischer",
+    email: "a.fischer@gmail.com",
+    artikel: "Audi Scheinwerfer links H7",
+    status: "versandt",
+    versandDatum: "08.05.2026",
+    tracking: "1Z999AA1044490023",
+    confirmSent: false,
+    timeline: [
+      { label: "Paket übergeben", time: "08.05., 09:30", done: true, active: false },
+      { label: "Im Paketzentrum Erfurt", time: "Ausstehend", done: false, active: true },
+      { label: "In Zustellung", time: "Ausstehend", done: false, active: false },
+      { label: "Zugestellt", time: "Ausstehend", done: false, active: false },
+    ]
+  },
+];
+
+let currentFilter = 'alle';
+let selectedId = null;
+let currentOrder = null;
+
+const statusConfig = {
+  versandt: { label: 'Versandt', cls: 'pill-versandt' },
+  unterwegs: { label: 'Unterwegs', cls: 'pill-unterwegs' },
+  zugestellt: { label: 'Zugestellt', cls: 'pill-zugestellt' },
+  problem: { label: 'Problem', cls: 'pill-problem' },
+};
+
+function renderTable() {
+  const filtered = currentFilter === 'alle' ? orders : orders.filter(o => o.status === currentFilter);
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = filtered.map(o => {
+    const sc = statusConfig[o.status];
+    const sentBtn = o.confirmSent
+      ? `<span class="action-btn sent">✓ Gesendet</span>`
+      : `<button class="action-btn" onclick="openModal(${o.id}, event)">✉ Senden</button>`;
+    return `
+      <tr onclick="selectOrder(${o.id})" class="${selectedId === o.id ? 'selected' : ''}">
+        <td><div class="order-num">${o.orderNum}</div></td>
+        <td>
+          <div class="customer-name">${o.customer}</div>
+          <div class="customer-email">${o.email}</div>
+        </td>
+        <td><div class="artikel">${o.artikel}</div></td>
+        <td><span class="status-pill ${sc.cls}">${sc.label}</span></td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim)">${o.versandDatum}</td>
+        <td>${sentBtn}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function selectOrder(id) {
+  selectedId = id;
+  currentOrder = orders.find(o => o.id === id);
+  renderTable();
+
+  const sc = statusConfig[currentOrder.status];
+  const tlHtml = currentOrder.timeline.map(t => `
+    <div class="timeline-item">
+      <div class="timeline-dot ${t.done ? 'done' : t.active ? 'active' : ''}"></div>
+      <div class="timeline-text">
+        <div class="timeline-label">${t.label}</div>
+        <div class="timeline-time">${t.time}</div>
+      </div>
+    </div>
+  `).join('');
+
+  const sentDisabled = currentOrder.confirmSent ? 'disabled' : '';
+  const sentLabel = currentOrder.confirmSent ? '✓ Bestätigung bereits gesendet' : '✉ Versandbestätigung senden';
+
+  document.getElementById('detailBody').innerHTML = `
+    <div class="detail-order-num">${currentOrder.orderNum}</div>
+    <div class="detail-customer">${currentOrder.customer}</div>
+    <div class="detail-email">${currentOrder.email}</div>
+
+    <div class="detail-section-title">Sendungsinfo</div>
+    <div class="detail-row">
+      <span class="detail-row-label">Status</span>
+      <span class="detail-row-value"><span class="status-pill ${sc.cls}">${sc.label}</span></span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-row-label">Artikel</span>
+      <span class="detail-row-value" style="font-size:12px">${currentOrder.artikel}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-row-label">Versanddatum</span>
+      <span class="detail-row-value">${currentOrder.versandDatum}</span>
+    </div>
+
+    <div class="tracking-box">
+      <div class="detail-section-title" style="margin-bottom:4px">DHL Trackingnummer</div>
+      <div class="tracking-num">${currentOrder.tracking}</div>
+    </div>
+
+    <div style="margin-top:16px">
+      <div class="detail-section-title">Sendungsverlauf</div>
+      <div class="timeline">${tlHtml}</div>
+    </div>
+
+    <button class="btn-send-mail" onclick="openModal(${currentOrder.id}, event)" ${sentDisabled}>${sentLabel}</button>
+  `;
+}
+
+function filterTable(btn, filter) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable();
+}
+
+function openModal(id, e) {
+  if (e) e.stopPropagation();
+  const o = orders.find(x => x.id === id);
+  currentOrder = o;
+  document.getElementById('modalTo').value = `${o.customer} <${o.email}>`;
+  document.getElementById('modalSubject').value = `Ihre Bestellung ${o.orderNum} wurde versandt`;
+  document.getElementById('modalBody').value = `Guten Tag ${o.customer.split(' ')[0]},\n\nIhre Bestellung ${o.orderNum} (${o.artikel}) wurde am ${o.versandDatum} versandt.\n\nIhre DHL-Trackingnummer lautet:\n${o.tracking}\n\nDen aktuellen Lieferstatus können Sie hier verfolgen:\nhttps://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html\n\nBei Fragen stehen wir Ihnen gerne zur Verfügung.\n\nMit freundlichen Grüßen\nOEM-Teile24\ninfo@oem-teile24.de`;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+function confirmSend() {
+  closeModal();
+  if (currentOrder) {
+    currentOrder.confirmSent = true;
+    renderTable();
+    if (selectedId === currentOrder.id) selectOrder(currentOrder.id);
+  }
+  showToast(`Versandbestätigung an ${currentOrder.customer} gesendet.`);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Date
+const now = new Date();
+document.getElementById('currentDate').textContent =
+  now.toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+
+renderTable();
+selectOrder(1);
+</script>
+</body>
+</html>

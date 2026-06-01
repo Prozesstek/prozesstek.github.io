@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEM-Teile24 – Bestellverwaltung</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #161921;
+    --surface3: #1c202a;
+    --border: #232730;
+    --border2: #2d3240;
+    --text: #e2e6f0;
+    --text-muted: #5a6175;
+    --text-dim: #8892a8;
+    --accent: #ff6b35;
+    --accent-dim: rgba(255,107,53,0.1);
+    --accent-mid: rgba(255,107,53,0.2);
+    --green: #34d399;
+    --green-dim: rgba(52,211,153,0.08);
+    --yellow: #fbbf24;
+    --yellow-dim: rgba(251,191,36,0.08);
+    --blue: #60a5fa;
+    --blue-dim: rgba(96,165,250,0.08);
+    --purple: #a78bfa;
+    --purple-dim: rgba(167,139,250,0.08);
+    --red: #f87171;
+    --red-dim: rgba(248,113,113,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    height: 56px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .topbar-left { display: flex; align-items: center; gap: 14px; }
+
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .vline { width: 1px; height: 16px; background: var(--border2); }
+
+  .page-title {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+  }
+
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 6px 12px;
+    width: 220px;
+    transition: border-color 0.15s;
+  }
+
+  .search-box:focus-within { border-color: var(--border2); }
+
+  .search-icon { color: var(--text-muted); font-size: 13px; }
+
+  .search-input {
+    background: none;
+    border: none;
+    outline: none;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    width: 100%;
+  }
+
+  .search-input::placeholder { color: var(--text-muted); }
+
+  .new-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+  }
+
+  .new-btn:hover { background: #e85a24; }
+
+  /* KPI ROW */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .kpi {
+    background: var(--surface);
+    padding: 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .kpi-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+  }
+
+  .kpi-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .kpi-sub { font-size: 11px; color: var(--text-muted); }
+
+  .kpi-value.accent { color: var(--accent); }
+  .kpi-value.green { color: var(--green); }
+  .kpi-value.yellow { color: var(--yellow); }
+  .kpi-value.blue { color: var(--blue); }
+  .kpi-value.dim { color: var(--text-dim); }
+
+  /* MAIN */
+  .main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* LEFT: TABLE */
+  .table-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-right: 1px solid var(--border);
+  }
+
+  .table-toolbar {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    flex-shrink: 0;
+  }
+
+  .tab {
+    padding: 5px 12px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-muted);
+    background: none;
+    transition: all 0.12s;
+  }
+
+  .tab:hover { color: var(--text-dim); border-color: var(--border); }
+  .tab.active { background: var(--surface3); color: var(--text); border-color: var(--border2); }
+
+  .count-badge {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-left: 3px;
+  }
+
+  .badge-accent { background: var(--accent-dim); color: var(--accent); }
+  .badge-yellow { background: var(--yellow-dim); color: var(--yellow); }
+  .badge-green { background: var(--green-dim); color: var(--green); }
+
+  .table-scroll { overflow-y: auto; flex: 1; }
+  .table-scroll::-webkit-scrollbar { width: 3px; }
+  .table-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  thead th {
+    padding: 9px 16px;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+
+  tbody tr:hover { background: var(--surface2); }
+  tbody tr.active-row { background: var(--surface3); border-left: 2px solid var(--accent); }
+
+  tbody td { padding: 11px 16px; font-size: 12px; vertical-align: middle; }
+
+  .mono { font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+
+  .cust-name { font-weight: 600; font-size: 13px; }
+  .cust-email { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .pill-neu { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-mid); }
+  .pill-bezahlt { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(96,165,250,0.2); }
+  .pill-versandt { background: var(--yellow-dim); color: var(--yellow); border: 1px solid rgba(251,191,36,0.2); }
+  .pill-abgeschlossen { background: var(--green-dim); color: var(--green); border: 1px solid rgba(52,211,153,0.2); }
+  .pill-storniert { background: var(--red-dim); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+
+  .amount { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; }
+
+  /* RIGHT: DETAIL */
+  .detail-pane {
+    width: 360px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .detail-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .detail-order-id {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .detail-customer { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .detail-email-line { font-size: 11px; color: var(--text-muted); }
+
+  .detail-body { flex: 1; overflow-y: auto; padding: 16px 20px; }
+  .detail-body::-webkit-scrollbar { width: 3px; }
+  .detail-body::-webkit-scrollbar-thumb { background: var(--border2); }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    margin-top: 18px;
+  }
+
+  .section-label:first-child { margin-top: 0; }
+
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  .info-cell {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+
+  .info-cell-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-family: 'IBM Plex Mono', monospace; }
+  .info-cell-value { font-size: 13px; font-weight: 600; }
+
+  .artikel-list { display: flex; flex-direction: column; gap: 6px; }
+
+  .artikel-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .artikel-name { font-size: 12px; font-weight: 500; color: var(--text); }
+  .artikel-qty { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .artikel-price { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: var(--green); }
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--border2);
+    margin-top: 8px;
+  }
+
+  .total-label { font-size: 12px; font-weight: 600; color: var(--text-dim); }
+  .total-value { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500; color: var(--green); }
+
+  .history-list { display: flex; flex-direction: column; gap: 0; }
+
+  .history-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .history-item:last-child { border-bottom: none; }
+
+  .history-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .history-text { font-size: 12px; color: var(--text-dim); line-height: 1.5; flex: 1; }
+  .history-time { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-muted); flex-shrink: 0; }
+
+  .detail-actions {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .act-btn {
+    padding: 9px;
+    border-radius: 7px;
+    border: 1px solid var(--border2);
+    background: var(--surface2);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+    transition: all 0.15s;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  .act-btn:hover { background: var(--surface3); color: var(--text); border-color: var(--border2); }
+  .act-btn.primary { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-mid); }
+  .act-btn.primary:hover { background: var(--accent); color: white; }
+
+  .detail-empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--surface3);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    padding: 11px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 0.22s ease;
+    z-index: 200;
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-icon { color: var(--green); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo">OEM-Teile24</div>
+    <div class="vline"></div>
+    <div class="page-title">Bestellverwaltung</div>
+  </div>
+  <div class="topbar-right">
+    <div class="search-box">
+      <span class="search-icon">⌕</span>
+      <input class="search-input" placeholder="Bestellung, Kunde, Artikel..." oninput="handleSearch(this.value)">
+    </div>
+    <button class="new-btn" onclick="showToast('Neue Bestellung anlegen...')">+ Neue Bestellung</button>
+  </div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi">
+    <div class="kpi-label">Heute eingegangen</div>
+    <div class="kpi-value accent">7</div>
+    <div class="kpi-sub">+2 gegenüber gestern</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Offen / unbezahlt</div>
+    <div class="kpi-value yellow">3</div>
+    <div class="kpi-sub">Warten auf Zahlung</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Versandbereit</div>
+    <div class="kpi-value blue">4</div>
+    <div class="kpi-sub">Zahlung bestätigt</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Umsatz heute</div>
+    <div class="kpi-value green">1.847 €</div>
+    <div class="kpi-sub">7 Bestellungen</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Monat gesamt</div>
+    <div class="kpi-value dim">12.340 €</div>
+    <div class="kpi-sub">Mai 2026</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="table-pane">
+    <div class="table-toolbar">
+      <button class="tab active" onclick="setTab(this,'alle')">Alle <span class="count-badge badge-accent" id="cnt-alle">12</span></button>
+      <button class="tab" onclick="setTab(this,'neu')">Neu <span class="count-badge badge-accent" id="cnt-neu">3</span></button>
+      <button class="tab" onclick="setTab(this,'bezahlt')">Bezahlt <span class="count-badge badge-yellow" id="cnt-bezahlt">4</span></button>
+      <button class="tab" onclick="setTab(this,'versandt')">Versandt <span class="count-badge badge-yellow" id="cnt-versandt">3</span></button>
+      <button class="tab" onclick="setTab(this,'abgeschlossen')">Abgeschlossen <span class="count-badge badge-green" id="cnt-abgeschlossen">2</span></button>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Bestell-Nr.</th>
+            <th>Kunde</th>
+            <th>Artikel</th>
+            <th>Status</th>
+            <th>Betrag</th>
+            <th>Datum</th>
+            <th>Zahlung</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="detail-pane" id="detailPane">
+    <div class="detail-empty" id="detailEmpty">
+      <span style="font-size:28px;opacity:0.2">◫</span>
+      Bestellung auswählen
+    </div>
+    <div id="detailContent" style="display:none;flex-direction:column;height:100%">
+      <div class="detail-header">
+        <div class="detail-order-id" id="dOrderId"></div>
+        <div class="detail-customer" id="dCustomer"></div>
+        <div class="detail-email-line" id="dEmail"></div>
+      </div>
+      <div class="detail-body" id="dBody"></div>
+      <div class="detail-actions">
+        <button class="act-btn primary" onclick="showToast('Rechnung wird erstellt...')">🧾 Rechnung</button>
+        <button class="act-btn primary" onclick="showToast('Versandlabel wird gedruckt...')">📦 Versandlabel</button>
+        <button class="act-btn" onclick="showToast('E-Mail an Kunden wird geöffnet...')">✉ E-Mail senden</button>
+        <button class="act-btn" onclick="showToast('Status wurde aktualisiert.')">↑ Status ändern</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg"></span>
+</div>
+
+<script>
+const orders = [
+  { id:"00125-09115", customer:"Julia Neumann", email:"julia.n@gmx.de", artikel:[{name:"Audi A3 Motorhaube",qty:1,price:387.00},{name:"Audi A3 Kühlergrill",qty:1,price:124.90}], status:"neu", datum:"08.05.2026", zahlung:"PayPal", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"10:28"},{dot:"var(--yellow)",text:"Zahlung ausstehend",time:"10:28"}] },
+  { id:"00125-09112", customer:"Thomas Bauer", email:"t.bauer@hotmail.com", artikel:[{name:"VW Kotflügel vorne links",qty:1,price:312.00}], status:"bezahlt", datum:"08.05.2026", zahlung:"Vorkasse", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"09:10"},{dot:"var(--blue)",text:"Zahlung bestätigt",time:"09:55"},{dot:"var(--yellow)",text:"Versandvorbereitung",time:"10:00"}] },
+  { id:"00125-09108", customer:"Sandra Krüger", email:"sandra.krueger@web.de", artikel:[{name:"Bremsenset VW Golf VII",qty:1,price:189.90},{name:"Bremsscheiben-Set vorne",qty:1,price:98.00}], status:"versandt", datum:"07.05.2026", zahlung:"PayPal", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"07.05 14:20"},{dot:"var(--blue)",text:"Zahlung bestätigt",time:"07.05 14:22"},{dot:"var(--yellow)",text:"Paket übergeben an DHL",time:"07.05 15:45"},{dot:"var(--yellow)",text:"In Zustellung",time:"08.05 08:20"}] },
+  { id:"00125-09101", customer:"Marcel Hoffmann", email:"m.hoffmann@gmail.com", artikel:[{name:"VW Emblem chrom hinten",qty:2,price:64.90},{name:"VW Schriftzug",qty:1,price:34.90}], status:"bezahlt", datum:"08.05.2026", zahlung:"PayPal", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"08:45"},{dot:"var(--blue)",text:"Zahlung bestätigt",time:"08:46"}] },
+  { id:"00125-09094", customer:"Klaus Wendt", email:"k.wendt@t-online.de", artikel:[{name:"Original VW AdBlue 10L",qty:2,price:17.00}], status:"abgeschlossen", datum:"06.05.2026", zahlung:"Vorkasse", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"06.05 11:00"},{dot:"var(--blue)",text:"Zahlung bestätigt",time:"06.05 12:30"},{dot:"var(--yellow)",text:"Versandt",time:"06.05 14:00"},{dot:"var(--green)",text:"Zugestellt",time:"07.05 11:20"}] },
+  { id:"00125-09088", customer:"Anna Fischer", email:"a.fischer@gmail.com", artikel:[{name:"Audi Hauptscheinwerfer links",qty:1,price:347.00}], status:"versandt", datum:"07.05.2026", zahlung:"PayPal", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"07.05 16:30"},{dot:"var(--blue)",text:"Zahlung bestätigt",time:"07.05 16:31"},{dot:"var(--yellow)",text:"Paket übergeben an DHL",time:"08.05 09:30"}] },
+  { id:"00125-09075", customer:"Mirko Fischer", email:"m.fischer@web.de", artikel:[{name:"SKODA Emblem schwarz vorne",qty:1,price:69.90}], status:"neu", datum:"08.05.2026", zahlung:"Vorkasse", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"11:15"},{dot:"var(--yellow)",text:"Warte auf Zahlungseingang",time:"11:15"}] },
+  { id:"00125-09062", customer:"Patrick Herklotz", email:"p.herklotz@gmail.com", artikel:[{name:"VW Golf Kotflügel rechts",qty:1,price:298.00},{name:"Radhausschale vorne rechts",qty:1,price:54.90}], status:"bezahlt", datum:"07.05.2026", zahlung:"PayPal", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"07.05 13:00"},{dot:"var(--blue)",text:"Zahlung bestätigt",time:"07.05 13:01"}] },
+  { id:"00125-09051", customer:"Martin Wagner", email:"m.wagner@t-online.de", artikel:[{name:"Seat Leon Stoßstange vorne",qty:1,price:224.90}], status:"versandt", datum:"06.05.2026", zahlung:"Vorkasse", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"06.05 09:00"},{dot:"var(--blue)",text:"Zahlung bestätigt",time:"06.05 10:15"},{dot:"var(--yellow)",text:"Versandt DHL",time:"06.05 14:30"}] },
+  { id:"00125-09044", customer:"David Faust", email:"d.faust@gmx.de", artikel:[{name:"Zündkerzen Set VW 2.0 TSI",qty:1,price:44.90},{name:"Luftfilter Golf VII",qty:1,price:28.90}], status:"abgeschlossen", datum:"05.05.2026", zahlung:"PayPal", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"05.05 08:30"},{dot:"var(--blue)",text:"Zahlung bestätigt",time:"05.05 08:31"},{dot:"var(--yellow)",text:"Versandt",time:"05.05 12:00"},{dot:"var(--green)",text:"Zugestellt",time:"06.05 10:45"}] },
+  { id:"00125-09038", customer:"Maria Heinze", email:"m.heinze@gmail.com", artikel:[{name:"SKODA Superb Motorhaube",qty:1,price:521.00}], status:"bezahlt", datum:"07.05.2026", zahlung:"Vorkasse", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"07.05 17:45"},{dot:"var(--blue)",text:"Zahlung bestätigt",time:"08.05 09:00"}] },
+  { id:"00125-09029", customer:"Andy Weber", email:"a.weber@web.de", artikel:[{name:"Audi A4 Heckstoßstange",qty:1,price:267.00},{name:"Kennzeichenhalter Set",qty:1,price:26.90}], status:"neu", datum:"08.05.2026", zahlung:"PayPal", history:[{dot:"var(--accent)",text:"Bestellung eingegangen",time:"12:02"},{dot:"var(--yellow)",text:"Zahlung ausstehend",time:"12:02"}] },
+];
+
+const pillMap = {
+  neu: '<span class="pill pill-neu">Neu</span>',
+  bezahlt: '<span class="pill pill-bezahlt">Bezahlt</span>',
+  versandt: '<span class="pill pill-versandt">Versandt</span>',
+  abgeschlossen: '<span class="pill pill-abgeschlossen">Fertig</span>',
+  storniert: '<span class="pill pill-storniert">Storniert</span>',
+};
+
+let currentTab = 'alle';
+let selectedId = null;
+let searchQuery = '';
+
+function getTotal(order) {
+  return order.artikel.reduce((s,a) => s + a.price * a.qty, 0).toFixed(2);
+}
+
+function filteredOrders() {
+  let list = currentTab === 'alle' ? orders : orders.filter(o => o.status === currentTab);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    list = list.filter(o => o.id.toLowerCase().includes(q) || o.customer.toLowerCase().includes(q) || o.artikel.some(a => a.name.toLowerCase().includes(q)));
+  }
+  return list;
+}
+
+function renderTable() {
+  const list = filteredOrders();
+  document.getElementById('tableBody').innerHTML = list.map(o => `
+    <tr onclick="selectOrder('${o.id}')" class="${selectedId===o.id?'active-row':''}">
+      <td><span class="mono">${o.id}</span></td>
+      <td>
+        <div class="cust-name">${o.customer}</div>
+        <div class="cust-email">${o.email}</div>
+      </td>
+      <td style="font-size:11px;color:var(--text-dim);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        ${o.artikel.map(a=>a.name).join(', ')}
+      </td>
+      <td>${pillMap[o.status]||''}</td>
+      <td><span class="amount" style="color:var(--green)">${getTotal(o)} €</span></td>
+      <td><span class="mono" style="color:var(--text-muted)">${o.datum}</span></td>
+      <td style="font-size:11px;color:var(--text-muted)">${o.zahlung}</td>
+    </tr>
+  `).join('');
+}
+
+function selectOrder(id) {
+  selectedId = id;
+  const o = orders.find(x => x.id === id);
+  renderTable();
+
+  document.getElementById('detailEmpty').style.display = 'none';
+  const dc = document.getElementById('detailContent');
+  dc.style.display = 'flex';
+
+  document.getElementById('dOrderId').textContent = o.id;
+  document.getElementById('dCustomer').textContent = o.customer;
+  document.getElementById('dEmail').textContent = o.email + ' · ' + o.zahlung;
+
+  const artikelHtml = o.artikel.map(a => `
+    <div class="artikel-item">
+      <div>
+        <div class="artikel-name">${a.name}</div>
+        <div class="artikel-qty">Menge: ${a.qty}</div>
+      </div>
+      <div class="artikel-price">${(a.price * a.qty).toFixed(2)} €</div>
+    </div>
+  `).join('');
+
+  const histHtml = o.history.map(h => `
+    <div class="history-item">
+      <div class="history-dot" style="background:${h.dot}"></div>
+      <div class="history-text">${h.text}</div>
+      <div class="history-time">${h.time}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('dBody').innerHTML = `
+    <div class="section-label">Bestellte Artikel</div>
+    <div class="artikel-list">${artikelHtml}</div>
+    <div class="total-row">
+      <span class="total-label">Gesamtbetrag</span>
+      <span class="total-value">${getTotal(o)} €</span>
+    </div>
+
+    <div class="section-label">Bestellinfo</div>
+    <div class="info-grid">
+      <div class="info-cell">
+        <div class="info-cell-label">Status</div>
+        <div class="info-cell-value">${pillMap[o.status]}</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Zahlungsart</div>
+        <div class="info-cell-value" style="font-size:12px">${o.zahlung}</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Datum</div>
+        <div class="info-cell-value" style="font-size:12px;font-family:'IBM Plex Mono',monospace">${o.datum}</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Artikel</div>
+        <div class="info-cell-value">${o.artikel.length} Position${o.artikel.length>1?'en':''}</div>
+      </div>
+    </div>
+
+    <div class="section-label">Verlauf</div>
+    <div class="history-list">${histHtml}</div>
+  `;
+}
+
+function setTab(btn, tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable();
+}
+
+function handleSearch(val) {
+  searchQuery = val;
+  renderTable();
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+renderTable();
+selectOrder('00125-09115');
+</script>
+</body>
+</html>
