@@ -1,0 +1,28 @@
+# Frederik Leckebusch IT-Dienstleistungen & Prozessautomatisierung
+> Individuelle Software und Prozessautomatisierung für Handwerk und KMU in Erfurt und Thüringen. Python, KI und Web-Apps zum festen Preis — keine IT-Sprache, messbare Zeitersparnis.
+
+## Über den Anbieter
+- Name: Frederik Leckebusch
+- Unternehmen: Frederik Leckebusch IT-Dienstleistungen & Prozessautomatisierung
+- Standort: Geraer Straße 21, 99096 Erfurt, Thüringen, Deutschland
+- Zielgruppe: KMU und Handwerksbetriebe mit 2–20 Mitarbeitern in Erfurt und Thüringen
+- Besonderheit: BWL-Hintergrund (SCM) kombiniert mit Python-Entwicklung und KI — spricht die Sprache der Unternehmer
+- Referenz: 4 produktive Automatisierungslösungen im Einsatz bei einem Zeitarbeitsunternehmen mit 60+ Mitarbeitern
+
+## Leistungen
+- [Prozessautomatisierung](https://prozesstek.de/leistungen/prozessautomatisierung/): Wiederkehrende Aufgaben wie Berichte, E-Mails und Dateiablage automatisieren — Python, 400–2.500 € Festpreis
+- [Dashboards & Web-Apps](https://prozesstek.de/leistungen/dashboards-webapps/): Individuelle Browser-Dashboards ohne Installation — Flask, SQLite
+- [Dokumente & PDF-Automation](https://prozesstek.de/leistungen/dokumente-pdf-automation/): Angebote, Rechnungen und Verträge automatisch befüllen und versenden — Word, PDF, OCR
+- [KI-Integration](https://prozesstek.de/leistungen/ki-integration/): E-Mails kategorisieren, Texte zusammenfassen, Daten klassifizieren mit Claude AI (Anthropic)
+- [Datenauswertung & Berichte](https://prozesstek.de/leistungen/datenauswertung-berichte/): Excel-Auswertungen automatisch erstellen — pandas, openpyxl
+
+## Preise
+- Projektpauschale: 400–2.500 € (je nach Umfang, fester Preis vor Beginn)
+- Wartungsvertrag optional: ab 50 €/Monat
+- Erstgespräch: kostenlos und unverbindlich
+- 30-Tage-Geld-zurück-Garantie
+
+## Kontakt
+- E-Mail: info@prozesstek.de
+- Telefon: +49 173 9120904
+- Website: https://prozesstek.de/
