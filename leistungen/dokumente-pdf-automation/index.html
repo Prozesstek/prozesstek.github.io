@@ -52,28 +52,10 @@
   }
   </script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = { theme: { extend: {
-      colors: { ink:{DEFAULT:'#0F172A',soft:'#1E293B'}, paper:{DEFAULT:'#FAF8F4',2:'#F3EEE5'}, accent:{DEFAULT:'#0369A1',600:'#0284C7'} },
-      fontFamily: { heading:['Archivo','sans-serif'], body:['Space Grotesk','sans-serif'] }
-    }}};
-  </script>
-  <style>
-    html { scroll-behavior: smooth; }
-    body { font-family:'Space Grotesk',sans-serif; background:#FAF8F4; color:#292524; -webkit-font-smoothing:antialiased; }
-    h1,h2,h3,h4 { font-family:'Archivo',sans-serif; }
-    .nums { font-variant-numeric: tabular-nums; }
-    .lift { transition: box-shadow 220ms ease, transform 220ms ease; }
-    .lift:hover { box-shadow:0 18px 40px -12px rgba(41,37,36,0.18); transform:translateY(-3px); }
-    .btn { transition: background 200ms ease, transform 120ms ease; }
-    .btn:active { transform: translateY(1px) scale(0.99); }
-    *:focus-visible { outline:2px solid #0369A1; outline-offset:2px; border-radius:4px; }
-    @media (prefers-reduced-motion: reduce){*,*::before,*::after{transition-duration:.01ms!important}}
-  </style>
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body class="antialiased">
 

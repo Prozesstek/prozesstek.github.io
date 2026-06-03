@@ -1,2 +1,7 @@
 # Interne Design-Referenzen — nicht veröffentlichen
 Inspiration/
+
+# Node build tooling — nicht veröffentlichen
+node_modules/
+package-lock.json
+src/

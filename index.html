@@ -72,74 +72,10 @@
     }
   }
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink:    { DEFAULT: '#0F172A', soft: '#1E293B' },
-            paper:  { DEFAULT: '#FAF8F4', 2: '#F3EEE5' },
-            accent: { DEFAULT: '#0369A1', 600: '#0284C7', ink: '#075985' },
-          },
-          fontFamily: {
-            heading: ['Archivo', 'sans-serif'],
-            body:    ['Space Grotesk', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
-  <style>
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Space Grotesk', sans-serif; background: #FAF8F4; color: #292524; -webkit-font-smoothing: antialiased; }
-    h1, h2, h3, h4 { font-family: 'Archivo', sans-serif; }
-
-    /* Sections clear the fixed nav when jumped to */
-    section[id] { scroll-margin-top: 6rem; }
-
-    /* Tabular figures for all stat numbers */
-    .nums { font-variant-numeric: tabular-nums; }
-
-    /* Fine grain overlay — breaks digital flatness, no glow blobs */
-    .grain::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-      opacity: 0.025; pointer-events: none;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    }
-
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-    .fade-up { animation: fadeUp 0.5s ease forwards; }
-
-    /* Cards lift with a warm, tinted shadow (not pure black) */
-    .lift { transition: box-shadow 220ms ease, transform 220ms ease; }
-    .lift:hover { box-shadow: 0 18px 40px -12px rgba(41,37,36,0.18); transform: translateY(-3px); }
-
-    .ulink { position: relative; }
-    .ulink::after { content:''; position:absolute; left:0; right:0; bottom:-2px; height:1.5px; background:#0369A1; transform:scaleX(0); transform-origin:left; transition:transform 200ms; }
-    .ulink:hover::after { transform:scaleX(1); }
-
-    /* Service list rows */
-    .srv { transition: padding-left 220ms ease, background 220ms ease; }
-    .srv:hover { padding-left: 0.5rem; }
-    .srv:hover .srv-num { color:#0369A1; }
-    .srv:hover .srv-arrow { transform: translateX(4px); opacity:1; }
-    .srv-arrow { transition: transform 220ms ease, opacity 220ms ease; opacity:0; }
-
-    /* Buttons: physical press feedback */
-    .btn { transition: background 200ms ease, transform 120ms ease, box-shadow 200ms ease; }
-    .btn:active { transform: translateY(1px) scale(0.99); }
-
-    *:focus-visible { outline: 2px solid #0369A1; outline-offset: 2px; border-radius: 4px; }
-  </style>
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body class="antialiased">
 
