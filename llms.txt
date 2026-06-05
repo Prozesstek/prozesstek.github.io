@@ -15,12 +15,14 @@
 - [Dokumente & PDF-Automation](https://prozesstek.de/leistungen/dokumente-pdf-automation/): Angebote, Rechnungen und Verträge automatisch befüllen und versenden — Word, PDF, OCR
 - [KI-Integration](https://prozesstek.de/leistungen/ki-integration/): E-Mails kategorisieren, Texte zusammenfassen, Daten klassifizieren mit Claude AI (Anthropic)
 - [Datenauswertung & Berichte](https://prozesstek.de/leistungen/datenauswertung-berichte/): Excel-Auswertungen automatisch erstellen — pandas, openpyxl
+- [KI-Coaching für Unternehmer](https://prozesstek.de/leistungen/ki-coaching/): 90-minütiges 1:1-Coaching für Geschäftsführer — was KI konkret für den eigenen Betrieb leisten kann, inkl. schriftlicher Zusammenfassung, 250 € Pauschale
 
 ## Preise
+- KI-Coaching: 250 € Pauschale (90 Min. + schriftliche Zusammenfassung)
 - Projektpauschale: 400–2.500 € (je nach Umfang, fester Preis vor Beginn)
 - Wartungsvertrag optional: ab 50 €/Monat
 - Erstgespräch: kostenlos und unverbindlich
-- 30-Tage-Geld-zurück-Garantie
+- Geld-zurück-Garantie auf alle Leistungen
 
 ## Kontakt
 - E-Mail: info@prozesstek.de
