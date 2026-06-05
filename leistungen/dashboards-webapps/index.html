@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -73,7 +73,26 @@
       Frederik Leckebusch
     </a>
     <div class="flex items-center gap-2">
-      <a href="../../#leistungen" class="hidden sm:inline-flex px-3.5 py-1.5 text-sm text-stone-600 hover:text-ink hover:bg-stone-200/60 rounded-full transition-colors">Alle Leistungen</a>
+      <div class="relative hidden sm:block" id="nav-dd-wrap">
+          <button id="nav-dd-btn" aria-haspopup="true" aria-expanded="false"
+            class="flex items-center gap-1 px-3.5 py-1.5 text-sm text-stone-600 hover:text-ink hover:bg-stone-200/60 rounded-full transition-colors">
+            Leistungen
+            <svg id="nav-dd-chev" class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="nav-dd" class="hidden absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-60 bg-white rounded-2xl border border-stone-200/80 shadow-[0_20px_48px_-12px_rgba(41,37,36,0.18)] p-2 z-50">
+            <a href="/leistungen/prozessautomatisierung/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">01</span>Prozessautomatisierung</a>
+            <a href="/leistungen/dashboards-webapps/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">02</span>Dashboards &amp; Web-Apps</a>
+            <a href="/leistungen/dokumente-pdf-automation/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">03</span>Dokumente &amp; PDF</a>
+            <a href="/leistungen/ki-integration/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">04</span>KI-Integration</a>
+            <a href="/leistungen/datenauswertung-berichte/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">05</span>Datenauswertung</a>
+            <a href="/leistungen/ki-coaching/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">06</span>KI-Coaching</a>
+            <div class="border-t border-stone-100 mt-1 pt-1">
+              <a href="/leistungen/" class="flex items-center gap-1.5 px-3 py-2 text-xs text-accent font-semibold rounded-xl hover:bg-accent/5 transition-colors">Alle Leistungen ansehen <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+            </div>
+          </div>
+        </div>
       <a href="../../#kontakt" class="btn inline-flex items-center gap-1.5 bg-ink hover:bg-ink-soft text-white text-sm font-medium px-4 py-2 rounded-full">Gespräch anfragen</a>
     </div>
   </nav>
@@ -307,5 +326,9 @@
   </div>
 </footer>
 
+
+<script>
+  (function(){var btn=document.getElementById('nav-dd-btn'),dd=document.getElementById('nav-dd'),chev=document.getElementById('nav-dd-chev');if(!btn||!dd)return;btn.addEventListener('click',function(e){e.stopPropagation();var o=!dd.classList.contains('hidden');dd.classList.toggle('hidden',o);btn.setAttribute('aria-expanded',String(!o));if(chev)chev.style.transform=o?'':'rotate(180deg)';});document.addEventListener('click',function(){dd.classList.add('hidden');btn.setAttribute('aria-expanded','false');if(chev)chev.style.transform='';});})();
+</script>
 </body>
 </html>
