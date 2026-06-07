@@ -11,11 +11,18 @@
 
 ## Leistungen
 - [Prozessautomatisierung](https://prozesstek.de/leistungen/prozessautomatisierung/): Wiederkehrende Aufgaben wie Berichte, E-Mails und Dateiablage automatisieren — Python, 400–2.500 € Festpreis
+  - [Vollständige Beschreibung (Markdown)](https://prozesstek.de/leistungen/prozessautomatisierung/index.md)
 - [Dashboards & Web-Apps](https://prozesstek.de/leistungen/dashboards-webapps/): Individuelle Browser-Dashboards ohne Installation — Flask, SQLite
+  - [Vollständige Beschreibung (Markdown)](https://prozesstek.de/leistungen/dashboards-webapps/index.md)
 - [Dokumente & PDF-Automation](https://prozesstek.de/leistungen/dokumente-pdf-automation/): Angebote, Rechnungen und Verträge automatisch befüllen und versenden — Word, PDF, OCR
+  - [Vollständige Beschreibung (Markdown)](https://prozesstek.de/leistungen/dokumente-pdf-automation/index.md)
 - [KI-Integration](https://prozesstek.de/leistungen/ki-integration/): E-Mails kategorisieren, Texte zusammenfassen, Daten klassifizieren mit Claude AI (Anthropic)
+  - [Vollständige Beschreibung (Markdown)](https://prozesstek.de/leistungen/ki-integration/index.md)
 - [Datenauswertung & Berichte](https://prozesstek.de/leistungen/datenauswertung-berichte/): Excel-Auswertungen automatisch erstellen — pandas, openpyxl
+  - [Vollständige Beschreibung (Markdown)](https://prozesstek.de/leistungen/datenauswertung-berichte/index.md)
 - [KI-Coaching für Unternehmer](https://prozesstek.de/leistungen/ki-coaching/): 90-minütiges 1:1-Coaching für Geschäftsführer — was KI konkret für den eigenen Betrieb leisten kann, inkl. schriftlicher Zusammenfassung, 250 € Pauschale
+  - [Vollständige Beschreibung (Markdown)](https://prozesstek.de/leistungen/ki-coaching/index.md)
+- [Leistungsübersicht (Markdown)](https://prozesstek.de/leistungen/index.md)
 
 ## Preise
 - KI-Coaching: 250 € Pauschale (90 Min. + schriftliche Zusammenfassung)
@@ -29,6 +36,7 @@
 - Standort: Erfurt, Thüringen — lokaler Anbieter, vor Ort bei Kunden verfügbar
 - Servicebereich: Erfurt, Thüringen, Mitteldeutschland
 - [Prozessautomatisierung Erfurt (Landingpage)](https://prozesstek.de/leistungen/prozessautomatisierung-erfurt/): Lokale SEO-Seite mit Geo-Daten, Referenzen aus Erfurt, Vor-Ort-Beratung
+  - [Vollständige Beschreibung (Markdown)](https://prozesstek.de/leistungen/prozessautomatisierung-erfurt/index.md)
 
 ## Kontakt
 - E-Mail: info@prozesstek.de
