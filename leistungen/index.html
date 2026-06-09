@@ -6,7 +6,7 @@
   <title>Alle Leistungen – Prozessautomatisierung & KI für KMU in Erfurt – prozesstek</title>
   <meta name="description" content="Prozessautomatisierung, KI-Integration, Dashboards, PDF-Automation, Datenauswertung und KI-Coaching für KMU und Handwerk in Erfurt und Thüringen. Alle Leistungen auf einen Blick." />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#FAF8F4" />
+  <meta name="theme-color" content="#0a0a0a" />
   <link rel="canonical" href="https://prozesstek.de/leistungen/" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/logo.png" type="image/png" sizes="512x512" />
@@ -31,191 +31,153 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Geist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body class="antialiased">
 
-<!-- NAV -->
-<div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-  <div class="w-full max-w-4xl pointer-events-auto">
-    <nav class="flex items-center justify-between px-5 h-14 rounded-2xl bg-paper/85 backdrop-blur-xl border border-stone-200/80 shadow-[0_8px_28px_-12px_rgba(41,37,36,0.18)]">
-
-      <a href="/" class="flex items-center gap-2 font-heading font-bold text-sm tracking-tight text-ink">
-        <img src="/brand/Logo.png" alt="prozesstek Logo" class="w-8 h-8 rounded-lg" />
-        Frederik Leckebusch
-      </a>
-
-      <div class="hidden md:flex items-center gap-1">
-        <!-- Leistungen Dropdown -->
-        <div class="relative" id="nav-dd-wrap">
-          <button id="nav-dd-btn" aria-haspopup="true" aria-expanded="false"
-            class="flex items-center gap-1 px-3.5 py-1.5 text-sm text-ink font-semibold bg-stone-100 rounded-full transition-colors">
-            Leistungen
-            <svg id="nav-dd-chev" class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-          <div id="nav-dd" class="hidden absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-60 bg-white rounded-2xl border border-stone-200/80 shadow-[0_20px_48px_-12px_rgba(41,37,36,0.18)] p-2 z-50">
-            <a href="/leistungen/prozessautomatisierung/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">01</span>Prozessautomatisierung</a>
-            <a href="/leistungen/dashboards-webapps/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">02</span>Dashboards &amp; Web-Apps</a>
-            <a href="/leistungen/dokumente-pdf-automation/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">03</span>Dokumente &amp; PDF</a>
-            <a href="/leistungen/ki-integration/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">04</span>KI-Integration</a>
-            <a href="/leistungen/datenauswertung-berichte/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">05</span>Datenauswertung</a>
-            <a href="/leistungen/ki-coaching/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-paper transition-colors text-sm text-stone-600 hover:text-ink"><span class="nums text-xs text-stone-300 font-heading font-bold w-4 shrink-0">06</span>KI-Coaching</a>
-          </div>
+<!-- BOTTOM PILL NAV -->
+<div class="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+  <nav class="pointer-events-auto glass-nav rounded-full px-4 h-12 flex items-center gap-1 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.6)]">
+    <a href="/" class="flex items-center gap-2 pr-3 mr-1 border-r border-bone/10">
+      <img src="/brand/Logo.png" alt="" class="w-6 h-6 rounded-md" />
+      <span class="font-heading font-bold text-xs tracking-tight text-bone hidden sm:block">prozesstek</span>
+    </a>
+    <div class="relative" id="nav-dd-wrap">
+      <button id="nav-dd-btn" aria-haspopup="true" aria-expanded="false"
+        class="flex items-center gap-1 px-3 py-1.5 text-xs text-bone font-semibold bg-white/10 rounded-full transition-colors hover:bg-white/15">
+        Leistungen
+        <svg id="nav-dd-chev" class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div id="nav-dd" class="hidden absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-60 glass-nav rounded-2xl p-2 z-50 shadow-[0_-20px_48px_-12px_rgba(0,0,0,0.5)]">
+        <a href="/leistungen/prozessautomatisierung/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-white/5 transition-colors text-sm text-mist hover:text-bone"><span class="nums text-xs text-fog font-heading font-bold w-4 shrink-0">01</span>Prozessautomatisierung</a>
+        <a href="/leistungen/dashboards-webapps/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-white/5 transition-colors text-sm text-mist hover:text-bone"><span class="nums text-xs text-fog font-heading font-bold w-4 shrink-0">02</span>Dashboards &amp; Web-Apps</a>
+        <a href="/leistungen/dokumente-pdf-automation/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-white/5 transition-colors text-sm text-mist hover:text-bone"><span class="nums text-xs text-fog font-heading font-bold w-4 shrink-0">03</span>Dokumente &amp; PDF</a>
+        <a href="/leistungen/ki-integration/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-white/5 transition-colors text-sm text-mist hover:text-bone"><span class="nums text-xs text-fog font-heading font-bold w-4 shrink-0">04</span>KI-Integration</a>
+        <a href="/leistungen/datenauswertung-berichte/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-white/5 transition-colors text-sm text-mist hover:text-bone"><span class="nums text-xs text-fog font-heading font-bold w-4 shrink-0">05</span>Datenauswertung</a>
+        <a href="/leistungen/ki-coaching/" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-white/5 transition-colors text-sm text-mist hover:text-bone"><span class="nums text-xs text-fog font-heading font-bold w-4 shrink-0">06</span>KI-Coaching</a>
+        <div class="border-t border-bone/8 mt-1 pt-1">
+          <a href="/leistungen/" class="flex items-center gap-1.5 px-3 py-2 text-xs text-accent font-semibold rounded-xl hover:bg-accent/10 transition-colors">Alle Leistungen <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
         </div>
-        <a href="/#referenzen" class="px-3.5 py-1.5 text-sm text-stone-600 hover:text-ink hover:bg-stone-200/60 rounded-full transition-colors">Referenzen</a>
-        <a href="/#ueber-mich" class="px-3.5 py-1.5 text-sm text-stone-600 hover:text-ink hover:bg-stone-200/60 rounded-full transition-colors">Über mich</a>
-      </div>
-
-      <div class="flex items-center gap-3">
-        <a href="/#kontakt" class="btn hidden md:inline-flex items-center gap-1.5 bg-ink hover:bg-ink-soft text-white text-sm font-medium px-4 py-2 rounded-full">
-          Gespräch anfragen
-        </a>
-        <button id="menu-btn" class="md:hidden p-2 text-ink" aria-label="Menü" aria-expanded="false">
-          <svg id="menu-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-          <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-      </div>
-    </nav>
-
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden mt-2 bg-paper/95 backdrop-blur-xl border border-stone-200 rounded-2xl px-4 py-3 flex-col gap-1 shadow-lg">
-      <p class="px-3 pt-1 pb-0.5 text-xs font-semibold text-stone-400 uppercase tracking-wider">Leistungen</p>
-      <a href="/leistungen/prozessautomatisierung/" class="px-3 py-2 text-sm text-stone-700 hover:text-ink hover:bg-stone-200/60 rounded-xl transition-colors flex items-center gap-2"><span class="nums text-xs text-stone-300 font-heading font-bold">01</span>Prozessautomatisierung</a>
-      <a href="/leistungen/dashboards-webapps/" class="px-3 py-2 text-sm text-stone-700 hover:text-ink hover:bg-stone-200/60 rounded-xl transition-colors flex items-center gap-2"><span class="nums text-xs text-stone-300 font-heading font-bold">02</span>Dashboards &amp; Web-Apps</a>
-      <a href="/leistungen/dokumente-pdf-automation/" class="px-3 py-2 text-sm text-stone-700 hover:text-ink hover:bg-stone-200/60 rounded-xl transition-colors flex items-center gap-2"><span class="nums text-xs text-stone-300 font-heading font-bold">03</span>Dokumente &amp; PDF</a>
-      <a href="/leistungen/ki-integration/" class="px-3 py-2 text-sm text-stone-700 hover:text-ink hover:bg-stone-200/60 rounded-xl transition-colors flex items-center gap-2"><span class="nums text-xs text-stone-300 font-heading font-bold">04</span>KI-Integration</a>
-      <a href="/leistungen/datenauswertung-berichte/" class="px-3 py-2 text-sm text-stone-700 hover:text-ink hover:bg-stone-200/60 rounded-xl transition-colors flex items-center gap-2"><span class="nums text-xs text-stone-300 font-heading font-bold">05</span>Datenauswertung</a>
-      <a href="/leistungen/ki-coaching/" class="px-3 py-2 text-sm text-stone-700 hover:text-ink hover:bg-stone-200/60 rounded-xl transition-colors flex items-center gap-2"><span class="nums text-xs text-stone-300 font-heading font-bold">06</span>KI-Coaching</a>
-      <div class="border-t border-stone-200/70 mt-1 pt-1">
-        <a href="/#referenzen" class="px-3 py-2.5 text-sm text-stone-700 hover:text-ink hover:bg-stone-200/60 rounded-xl transition-colors block">Referenzen</a>
-        <a href="/#ueber-mich" class="px-3 py-2.5 text-sm text-stone-700 hover:text-ink hover:bg-stone-200/60 rounded-xl transition-colors block">Über mich</a>
-        <a href="/#kontakt" class="mt-1 px-3 py-2.5 text-sm font-semibold text-white bg-ink hover:bg-ink-soft rounded-xl transition-colors text-center block">Gespräch anfragen</a>
       </div>
     </div>
-  </div>
+    <a href="/#referenzen" class="px-3 py-1.5 text-xs text-mist hover:text-bone hover:bg-white/8 rounded-full transition-colors">Referenzen</a>
+    <a href="/#ueber-mich" class="px-3 py-1.5 text-xs text-mist hover:text-bone hover:bg-white/8 rounded-full transition-colors hidden sm:block">Über mich</a>
+    <a href="/#kontakt" class="ml-1 px-4 py-1.5 text-xs font-semibold bg-white text-black rounded-full hover:bg-bone transition-colors">Anfragen</a>
+  </nav>
 </div>
 
-<main class="pt-28 pb-24 px-6 lg:px-12 bg-paper min-h-screen">
+<main class="pt-20 pb-32 px-6 lg:px-12 min-h-screen" style="background:#0a0a0a">
   <div class="max-w-7xl mx-auto">
 
-    <!-- Header -->
-    <div class="max-w-2xl mb-16">
-      <nav class="text-xs text-stone-400 mb-6">
+    <div class="max-w-2xl mb-16 pt-8">
+      <nav class="text-xs text-fog mb-6">
         <a href="/" class="hover:text-accent">Startseite</a>
-        <span class="mx-1.5 text-stone-300">/</span>
-        <span class="text-stone-600">Leistungen</span>
+        <span class="mx-1.5 text-iron">/</span>
+        <span class="text-mist">Leistungen</span>
       </nav>
       <p class="text-accent font-semibold text-sm uppercase tracking-[0.16em] mb-3">Was ich umsetze</p>
-      <h1 class="font-heading font-extrabold text-ink text-4xl md:text-5xl leading-[1.06] tracking-tight mb-5" style="text-wrap:balance">
+      <h1 class="font-heading font-extrabold text-bone text-4xl md:text-5xl leading-[1.06] tracking-tight mb-5" style="text-wrap:balance">
         Alle Leistungen auf einen Blick
       </h1>
-      <p class="text-stone-500 text-lg leading-relaxed">Keine Standardsoftware — jede Lösung auf Ihren Betrieb zugeschnitten. Fester Preis, keine offenen Enden, messbare Zeitersparnis ab dem ersten Tag.</p>
+      <p class="text-mist text-lg leading-relaxed">Keine Standardsoftware — jede Lösung auf Ihren Betrieb zugeschnitten. Fester Preis, keine offenen Enden, messbare Zeitersparnis ab dem ersten Tag.</p>
     </div>
 
     <!-- Tile grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
 
-      <!-- 01 -->
-      <a href="/leistungen/prozessautomatisierung/" class="lift group block bg-white border border-stone-200/80 rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
+      <a href="/leistungen/prozessautomatisierung/" class="lift group block glass rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
         <div class="flex items-start justify-between mb-5">
-          <span class="nums font-heading font-extrabold text-stone-200 text-3xl group-hover:text-accent/30 transition-colors">01</span>
-          <svg class="w-5 h-5 text-stone-300 group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          <span class="nums font-heading font-extrabold text-iron text-3xl group-hover:text-accent/40 transition-colors">01</span>
+          <svg class="w-5 h-5 text-iron group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </div>
-        <h2 class="font-heading font-bold text-ink text-xl mb-2 group-hover:text-accent transition-colors">Prozessautomatisierung</h2>
-        <p class="text-stone-500 text-sm leading-relaxed mb-5 flex-1">Wiederkehrende Aufgaben — Berichte, E-Mails, Dateiablage — automatisch erledigt. Sie machen es einmal, das System danach immer.</p>
+        <h2 class="font-heading font-bold text-bone text-xl mb-2 group-hover:text-accent transition-colors">Prozessautomatisierung</h2>
+        <p class="text-fog text-sm leading-relaxed mb-5 flex-1">Wiederkehrende Aufgaben — Berichte, E-Mails, Dateiablage — automatisch erledigt. Sie machen es einmal, das System danach immer.</p>
         <div class="flex flex-wrap gap-1.5">
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">Python</span>
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">Excel / CSV</span>
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">E-Mail</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">Python</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">Excel / CSV</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">E-Mail</span>
         </div>
       </a>
 
-      <!-- 02 -->
-      <a href="/leistungen/dashboards-webapps/" class="lift group block bg-white border border-stone-200/80 rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
+      <a href="/leistungen/dashboards-webapps/" class="lift group block glass rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
         <div class="flex items-start justify-between mb-5">
-          <span class="nums font-heading font-extrabold text-stone-200 text-3xl group-hover:text-accent/30 transition-colors">02</span>
-          <svg class="w-5 h-5 text-stone-300 group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          <span class="nums font-heading font-extrabold text-iron text-3xl group-hover:text-accent/40 transition-colors">02</span>
+          <svg class="w-5 h-5 text-iron group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </div>
-        <h2 class="font-heading font-bold text-ink text-xl mb-2 group-hover:text-accent transition-colors">Dashboards &amp; Web-Apps</h2>
-        <p class="text-stone-500 text-sm leading-relaxed mb-5 flex-1">Übersichtliche Browser-Anwendungen, die Ihre wichtigsten Zahlen auf einen Blick zeigen. Keine Installation nötig.</p>
+        <h2 class="font-heading font-bold text-bone text-xl mb-2 group-hover:text-accent transition-colors">Dashboards &amp; Web-Apps</h2>
+        <p class="text-fog text-sm leading-relaxed mb-5 flex-1">Übersichtliche Browser-Anwendungen, die Ihre wichtigsten Zahlen auf einen Blick zeigen. Keine Installation nötig.</p>
         <div class="flex flex-wrap gap-1.5">
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">Flask</span>
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">SQLite</span>
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">Browser</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">Flask</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">SQLite</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">Browser</span>
         </div>
       </a>
 
-      <!-- 03 -->
-      <a href="/leistungen/dokumente-pdf-automation/" class="lift group block bg-white border border-stone-200/80 rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
+      <a href="/leistungen/dokumente-pdf-automation/" class="lift group block glass rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
         <div class="flex items-start justify-between mb-5">
-          <span class="nums font-heading font-extrabold text-stone-200 text-3xl group-hover:text-accent/30 transition-colors">03</span>
-          <svg class="w-5 h-5 text-stone-300 group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          <span class="nums font-heading font-extrabold text-iron text-3xl group-hover:text-accent/40 transition-colors">03</span>
+          <svg class="w-5 h-5 text-iron group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </div>
-        <h2 class="font-heading font-bold text-ink text-xl mb-2 group-hover:text-accent transition-colors">Dokumente &amp; PDF-Automation</h2>
-        <p class="text-stone-500 text-sm leading-relaxed mb-5 flex-1">Angebote, Verträge, Rechnungen automatisch befüllt und versendet. Gescannte Belege werden ausgelesen und sortiert.</p>
+        <h2 class="font-heading font-bold text-bone text-xl mb-2 group-hover:text-accent transition-colors">Dokumente &amp; PDF-Automation</h2>
+        <p class="text-fog text-sm leading-relaxed mb-5 flex-1">Angebote, Verträge, Rechnungen automatisch befüllt und versendet. Gescannte Belege werden ausgelesen und sortiert.</p>
         <div class="flex flex-wrap gap-1.5">
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">Word</span>
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">PDF / OCR</span>
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">Outlook</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">Word</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">PDF / OCR</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">Outlook</span>
         </div>
       </a>
 
-      <!-- 04 -->
-      <a href="/leistungen/ki-integration/" class="lift group block bg-white border border-stone-200/80 rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
+      <a href="/leistungen/ki-integration/" class="lift group block glass rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
         <div class="flex items-start justify-between mb-5">
-          <span class="nums font-heading font-extrabold text-stone-200 text-3xl group-hover:text-accent/30 transition-colors">04</span>
-          <svg class="w-5 h-5 text-stone-300 group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          <span class="nums font-heading font-extrabold text-iron text-3xl group-hover:text-accent/40 transition-colors">04</span>
+          <svg class="w-5 h-5 text-iron group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </div>
-        <h2 class="font-heading font-bold text-ink text-xl mb-2 group-hover:text-accent transition-colors">KI-Integration</h2>
-        <p class="text-stone-500 text-sm leading-relaxed mb-5 flex-1">E-Mails kategorisieren, Texte zusammenfassen, Daten klassifizieren — mit moderner KI direkt in Ihre bestehende Software eingebaut.</p>
+        <h2 class="font-heading font-bold text-bone text-xl mb-2 group-hover:text-accent transition-colors">KI-Integration</h2>
+        <p class="text-fog text-sm leading-relaxed mb-5 flex-1">E-Mails kategorisieren, Texte zusammenfassen, Daten klassifizieren — mit moderner KI direkt in Ihre bestehende Software eingebaut.</p>
         <div class="flex flex-wrap gap-1.5">
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">Claude AI</span>
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">Anthropic API</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">Claude AI</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">Anthropic API</span>
         </div>
       </a>
 
-      <!-- 05 -->
-      <a href="/leistungen/datenauswertung-berichte/" class="lift group block bg-white border border-stone-200/80 rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
+      <a href="/leistungen/datenauswertung-berichte/" class="lift group block glass rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
         <div class="flex items-start justify-between mb-5">
-          <span class="nums font-heading font-extrabold text-stone-200 text-3xl group-hover:text-accent/30 transition-colors">05</span>
-          <svg class="w-5 h-5 text-stone-300 group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          <span class="nums font-heading font-extrabold text-iron text-3xl group-hover:text-accent/40 transition-colors">05</span>
+          <svg class="w-5 h-5 text-iron group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </div>
-        <h2 class="font-heading font-bold text-ink text-xl mb-2 group-hover:text-accent transition-colors">Datenauswertung &amp; Berichte</h2>
-        <p class="text-stone-500 text-sm leading-relaxed mb-5 flex-1">Excel-Auswertungen, die früher Stunden dauerten, in Sekunden automatisiert. Kennzahlen, Wochenberichte, Personalübersichten.</p>
+        <h2 class="font-heading font-bold text-bone text-xl mb-2 group-hover:text-accent transition-colors">Datenauswertung &amp; Berichte</h2>
+        <p class="text-fog text-sm leading-relaxed mb-5 flex-1">Excel-Auswertungen, die früher Stunden dauerten, in Sekunden automatisiert. Kennzahlen, Wochenberichte, Personalübersichten.</p>
         <div class="flex flex-wrap gap-1.5">
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">pandas</span>
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">Excel</span>
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">openpyxl</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">pandas</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">Excel</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">openpyxl</span>
         </div>
       </a>
 
-      <!-- 06 -->
-      <a href="/leistungen/ki-coaching/" class="lift group block bg-white border border-stone-200/80 rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
+      <a href="/leistungen/ki-coaching/" class="lift group block glass rounded-2xl p-7 flex flex-col hover:border-accent/30 transition-colors">
         <div class="flex items-start justify-between mb-5">
-          <span class="nums font-heading font-extrabold text-stone-200 text-3xl group-hover:text-accent/30 transition-colors">06</span>
-          <svg class="w-5 h-5 text-stone-300 group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          <span class="nums font-heading font-extrabold text-iron text-3xl group-hover:text-accent/40 transition-colors">06</span>
+          <svg class="w-5 h-5 text-iron group-hover:text-accent transition-colors mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </div>
-        <h2 class="font-heading font-bold text-ink text-xl mb-2 group-hover:text-accent transition-colors">KI-Coaching für Unternehmer</h2>
-        <p class="text-stone-500 text-sm leading-relaxed mb-5 flex-1">In 90 Minuten klären wir, was KI konkret für Ihren Betrieb leistet — und was nicht. Inkl. schriftlicher Handlungsempfehlung.</p>
+        <h2 class="font-heading font-bold text-bone text-xl mb-2 group-hover:text-accent transition-colors">KI-Coaching für Unternehmer</h2>
+        <p class="text-fog text-sm leading-relaxed mb-5 flex-1">In 90 Minuten klären wir, was KI konkret für Ihren Betrieb leistet — und was nicht. Inkl. schriftlicher Handlungsempfehlung.</p>
         <div class="flex flex-wrap gap-1.5">
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">ChatGPT</span>
-          <span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-md">Claude</span>
-          <span class="text-xs bg-accent/10 text-accent px-2 py-1 rounded-md font-medium">250 € Pauschal</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">ChatGPT</span>
+          <span class="text-xs bg-white/8 text-mist px-2 py-1 rounded-full">Claude</span>
+          <span class="text-xs bg-accent/15 text-accent px-2 py-1 rounded-full font-medium">250 € Pauschal</span>
         </div>
       </a>
 
     </div>
 
     <!-- Pricing band -->
-    <div class="mt-10 rounded-2xl bg-ink text-white p-7 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+    <div class="mt-10 glass rounded-2xl p-7 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
       <div>
-        <div class="text-white/50 text-xs uppercase tracking-wider font-semibold mb-2">Transparente Preise</div>
-        <p class="text-white/85 leading-relaxed max-w-md">KI-Coaching ab <strong class="text-white nums">250 €</strong>. Einmalige Projektpauschale <strong class="text-white nums">400 – 2.500 €</strong> je nach Umfang. Optional Wartungsvertrag ab <strong class="text-white nums">50 €/Monat</strong>.</p>
+        <div class="text-fog text-xs uppercase tracking-wider font-semibold mb-2">Transparente Preise</div>
+        <p class="text-mist leading-relaxed max-w-md">KI-Coaching ab <strong class="text-bone nums">250 €</strong>. Einmalige Projektpauschale <strong class="text-bone nums">400 – 2.500 €</strong> je nach Umfang. Optional Wartungsvertrag ab <strong class="text-bone nums">50 €/Monat</strong>.</p>
       </div>
-      <a href="/#kontakt" class="btn inline-flex items-center gap-2 bg-accent hover:bg-accent-600 text-white font-semibold px-5 py-3 rounded-xl text-sm whitespace-nowrap self-start sm:self-auto">
+      <a href="/#kontakt" class="btn inline-flex items-center gap-2 bg-white hover:bg-bone text-black font-semibold px-5 py-3 rounded-full text-sm whitespace-nowrap self-start sm:self-auto">
         Angebot anfragen
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
       </a>
@@ -224,22 +186,18 @@
   </div>
 </main>
 
-<footer class="bg-ink-soft py-7 px-6 border-t border-white/5">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-stone-500">
+<footer class="py-7 px-6 border-t border-bone/8" style="background:#0a0a0a; padding-bottom: calc(1.75rem + env(safe-area-inset-bottom, 0px))">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-fog pb-16 md:pb-0">
     <div>Frederik Leckebusch · IT-Dienstleistungen &amp; Prozessautomatisierung · Erfurt</div>
     <div class="flex items-center gap-4">
-      <a href="/" class="hover:text-stone-300 transition-colors">Startseite</a>
-      <a href="/#impressum" class="hover:text-stone-300 transition-colors">Impressum</a>
-      <a href="/#datenschutz" class="hover:text-stone-300 transition-colors">Datenschutz</a>
+      <a href="/" class="hover:text-mist transition-colors">Startseite</a>
+      <a href="/#impressum" class="hover:text-mist transition-colors">Impressum</a>
+      <a href="/#datenschutz" class="hover:text-mist transition-colors">Datenschutz</a>
     </div>
   </div>
 </footer>
 
 <script>
-  // Mobile menu
-  var menuBtn=document.getElementById('menu-btn'),mob=document.getElementById('mobile-menu'),ico=document.getElementById('menu-icon-open'),icx=document.getElementById('menu-icon-close');
-  if(menuBtn&&mob){menuBtn.addEventListener('click',function(){var o=!mob.classList.contains('hidden');mob.classList.toggle('hidden',o);mob.classList.toggle('flex',!o);ico.classList.toggle('hidden',!o);icx.classList.toggle('hidden',o);menuBtn.setAttribute('aria-expanded',String(!o));});mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mob.classList.add('hidden');mob.classList.remove('flex');ico.classList.remove('hidden');icx.classList.add('hidden');menuBtn.setAttribute('aria-expanded','false');});});}
-  // Leistungen dropdown
   (function(){var btn=document.getElementById('nav-dd-btn'),dd=document.getElementById('nav-dd'),chev=document.getElementById('nav-dd-chev');if(!btn||!dd)return;btn.addEventListener('click',function(e){e.stopPropagation();var o=!dd.classList.contains('hidden');dd.classList.toggle('hidden',o);btn.setAttribute('aria-expanded',String(!o));if(chev)chev.style.transform=o?'':'rotate(180deg)';});document.addEventListener('click',function(){dd.classList.add('hidden');btn.setAttribute('aria-expanded','false');if(chev)chev.style.transform='';});})();
 </script>
 </body>

@@ -8,13 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        void:   '#0a0a0a',
+        char:   '#1d1d1d',
+        iron:   '#3d3d3d',
+        bone:   '#e5e5e5',
+        mist:   '#c2c2c2',
+        fog:    '#686868',
         ink:    { DEFAULT: '#0F172A', soft: '#1E293B' },
-        paper:  { DEFAULT: '#FAF8F4', 2: '#F3EEE5' },
         accent: { DEFAULT: '#0369A1', 600: '#0284C7', ink: '#075985' },
       },
       fontFamily: {
-        heading: ['Archivo', 'sans-serif'],
-        body:    ['Space Grotesk', 'sans-serif'],
+        heading: ['Geist', 'Inter', 'ui-sans-serif', 'sans-serif'],
+        body:    ['DM Sans', 'ui-sans-serif', 'sans-serif'],
       },
     },
   },
